@@ -1,7 +1,9 @@
+import LoginFrom from "@/components/modules/auth/LoginFrom";
+
 const LoginPage = () => {
   return (
     <div>
-      <h1>This is login page</h1>
+      <LoginFrom />
     </div>
   );
 };

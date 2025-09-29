@@ -1,10 +1,9 @@
-import { Button } from "@/components/ui/button";
+import BannerSection from "@/components/modules/Home/BannerSection";
 
 const HomePage = () => {
   return (
     <div>
-      <h1>This is Home page</h1>
-      <Button>Click me</Button>
+      <BannerSection />
     </div>
   );
 };
