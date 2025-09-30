@@ -5,7 +5,7 @@ import { SpinningText } from "@/components/ui/spinning-text";
 
 const AboutMeSection = () => {
   return (
-    <section className="relative py-16 md:py-24 flex items-center justify-center   text-white">
+    <section className="relative py-16 md:py-20 flex items-center justify-center   text-white">
       <div className="container mx-auto px-2 md:px-4 max-w-7xl z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 items-center justify-center  gap-12">
           {/* Left Section - Image with SpinningText */}
