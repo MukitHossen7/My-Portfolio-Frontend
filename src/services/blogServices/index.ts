@@ -7,3 +7,9 @@ export const getAllBlogs = async () => {
   const data = await res.json();
   return data;
 };
+
+export const getBlogBySlug = async (slug: string) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog/${slug}`);
+  const data = await res.json();
+  return data;
+};

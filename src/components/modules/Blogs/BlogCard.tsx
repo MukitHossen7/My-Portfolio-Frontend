@@ -15,7 +15,7 @@ import Link from "next/link";
 
 const BlogCard = ({ blog }: { blog: IBlog }) => {
   return (
-    <div>
+    <Link className="cursor-pointer" href={`/blog/${blog?.slug}`}>
       <Card className="bg-[#020617] shadow-md hover:shadow-xl transition-shadow duration-300 rounded-xl">
         <CardHeader className="p-0">
           <div className="relative h-56 w-full overflow-hidden rounded-t-xl">
@@ -56,11 +56,9 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
         </CardContent>
 
         <CardFooter className="p-4 flex justify-between items-center">
-          <Link href={`/blog/${blog.slug}`}>
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2">
-              <ExternalLink className="h-4 w-4" /> Read More
-            </Button>
-          </Link>
+          <Button className="bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2">
+            <ExternalLink className="h-4 w-4" /> Read More
+          </Button>
 
           {blog.isFeatured && (
             <span className="text-yellow-400 font-semibold text-sm">
@@ -69,7 +67,7 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
           )}
         </CardFooter>
       </Card>
-    </div>
+    </Link>
   );
 };
 

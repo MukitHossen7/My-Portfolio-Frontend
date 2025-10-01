@@ -16,10 +16,10 @@ export const generateMetadata = async ({
   params: Promise<{ projectSlug: string }>;
 }) => {
   const { projectSlug } = await params;
-  const { data: blog } = await getProjectById(projectSlug);
+  const { data: project } = await getProjectById(projectSlug);
   return {
-    title: blog.title,
-    description: blog.description,
+    title: project.title,
+    description: project.description,
   };
 };
 
