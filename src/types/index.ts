@@ -30,6 +30,7 @@ export interface IBlog {
   title: string;
   slug: string;
   excerpt: string;
+  content: string;
   thumbnail: string;
   tags: string[];
   views: number;

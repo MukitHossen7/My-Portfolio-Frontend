@@ -6,7 +6,7 @@ export const generateStaticParams = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/project`);
   const { data: projects } = await res.json();
   return projects.map((project: IProject) => ({
-    projectSlug: String(project.slug),
+    projectSlug: project.slug,
   }));
 };
 

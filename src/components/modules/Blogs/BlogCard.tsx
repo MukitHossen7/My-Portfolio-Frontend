@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { IBlog } from "@/types";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Eye } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -29,30 +29,42 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
         </CardHeader>
 
         <CardContent className="p-4">
-          <CardTitle className="text-xl md:text-2xl text-white font-semibold mb-2">
+          <CardTitle className="text-xl md:text-2xl text-gray-100 font-semibold mb-2">
             {blog?.title}
           </CardTitle>
-          <CardDescription className="text-gray-300 mb-3">
+          <CardDescription className="text-gray-300 mb-4">
             {blog?.excerpt}
           </CardDescription>
 
-          <div className="flex flex-wrap gap-2 mb-3">
+          <div className="flex flex-wrap gap-2 mb-5">
             {blog?.tags?.map((tag, idx) => (
               <span
                 key={idx}
-                className="px-3 py-1 bg-gray-800 text-gray-200 text-xs rounded-full border border-gray-600"
+                className="px-3 py-1  text-gray-200 text-xs rounded-full border border-gray-700"
               >
                 {tag}
               </span>
             ))}
           </div>
 
-          <p className="text-gray-400 text-xs">
-            By{" "}
-            <span className="font-medium text-white">{blog.author.name}</span> •{" "}
-            {new Date(blog.createdAt).toLocaleDateString()} • {blog?.views}{" "}
-            views
-          </p>
+          <div className="text-gray-400 text-sm flex items-center justify-between">
+            <div className="flex flex-col gap-1">
+              <p>
+                By{" "}
+                <span className="font-semibold text-gray-100">
+                  {blog.author.name}
+                </span>{" "}
+              </p>
+              <p className="text-xs">
+                {new Date(blog.createdAt).toLocaleDateString()}
+              </p>
+            </div>
+
+            <p className="text-gray-200 font-semibold flex items-center gap-1">
+              <Eye className="text-sm" />
+              {blog?.views}
+            </p>
+          </div>
         </CardContent>
 
         <CardFooter className="p-4 flex justify-between items-center">
