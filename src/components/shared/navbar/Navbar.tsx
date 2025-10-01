@@ -12,45 +12,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import Link from "next/link";
-import { useState, useEffect } from "react";
 
 export default function Navbar() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    // Check local storage for theme preference
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      setIsDarkMode(true);
-      document.documentElement.classList.add("dark");
-    } else {
-      setIsDarkMode(false);
-      document.documentElement.classList.remove("dark");
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    setIsDarkMode((prev) => {
-      const newMode = !prev;
-      if (newMode) {
-        document.documentElement.classList.add("dark");
-        localStorage.setItem("theme", "dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-        localStorage.setItem("theme", "light");
-      }
-      return newMode;
-    });
-  };
-
   return (
-    <header className="border-b border-gray-200 dark:border-gray-700 px-4 md:px-6 bg-white dark:bg-gray-900 shadow-sm">
+    <header className="border-b  border-gray-700 px-4 md:px-6 bg-[#020617] shadow-sm text-gray-100">
       <div className="flex h-16 items-center justify-between gap-4">
         {/* Left side */}
-        <Link
-          href="/"
-          className="text-2xl font-bold text-gray-900 dark:text-white"
-        >
+        <Link href="/" className="text-2xl font-bold text-gray-300">
           Portfolio
         </Link>
         <div className="flex flex-1  gap-2">
@@ -97,7 +65,7 @@ export default function Navbar() {
                 <NavigationMenuList className="flex-col items-start gap-0 md:gap-2">
                   <Link
                     href="/"
-                    className="block py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+                    className="block py-2 px-3 text-gray-100  hover:bg-gray-100  rounded-md"
                   >
                     Home
                   </Link>
@@ -123,19 +91,19 @@ export default function Navbar() {
           <NavigationMenuList className="gap-10">
             <Link
               href="/"
-              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+              className="text-gray-200 text-lg font-medium  hover:text-blue-400 hover:font-normal transition-colors duration-200"
             >
               Home
             </Link>
             <Link
               href="/project"
-              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+              className="text-gray-200 text-lg font-medium  hover:text-blue-400 hover:font-normal transition-colors duration-200"
             >
               Project
             </Link>
             <Link
               href="/blog"
-              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+              className="text-gray-200 text-lg font-medium  hover:text-blue-400 hover:font-normal transition-colors duration-200"
             >
               Blog
             </Link>
@@ -143,52 +111,6 @@ export default function Navbar() {
         </NavigationMenu>
         {/* Right side */}
         <div className="flex flex-1 items-center justify-end gap-4">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleTheme}
-            className="text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full"
-          >
-            {isDarkMode ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-sun"
-              >
-                <circle cx="12" cy="12" r="4" />
-                <path d="M12 2v2" />
-                <path d="M12 20v2" />
-                <path d="m4.93 4.93 1.41 1.41" />
-                <path d="m17.66 17.66 1.41 1.41" />
-                <path d="M2 12h2" />
-                <path d="M20 12h2" />
-                <path d="m6.34 17.66-1.41 1.41" />
-                <path d="m19.07 4.93-1.41 1.41" />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-moon"
-              >
-                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-              </svg>
-            )}
-          </Button>
           <UserMenu />
         </div>
       </div>

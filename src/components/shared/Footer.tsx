@@ -1,7 +1,9 @@
 const Footer = () => {
   return (
-    <div className="border-t px-4 md:px-6">
-      <span className="text-center">Copyright © 2025 by Mukit Hossen.</span>
+    <div className=" border-t border-gray-800 py-4 text-center bg-[#020617]">
+      <span className="text-center text-gray-300 font-medium">
+        Copyright © 2025 by Mukit Hossen.
+      </span>
     </div>
   );
 };

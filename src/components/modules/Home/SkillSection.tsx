@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 
 const SkillSection = () => {
   return (
-    <section className="py-16 md:py-20 text-white">
+    <section className="py-16 md:py-20 text-white bg-[#020617]">
       <div className="container mx-auto px-6 max-w-7xl">
         <h2 className="text-2xl md:text-3xl font-bold  text-center">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 uppercase">

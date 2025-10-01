@@ -17,7 +17,7 @@ import Link from "next/link";
 const ProjectCard = ({ project }: { project: IProject }) => {
   return (
     <div>
-      <Card className="relative shadow-none py-6">
+      <Card className="relative shadow-none py-6 bg-[#020617]">
         <CardHeader>
           <Lens
             zoomFactor={2}
@@ -40,7 +40,7 @@ const ProjectCard = ({ project }: { project: IProject }) => {
             {project.description.slice(0, 100)} ....
           </CardDescription>
           <div className="mt-4 space-y-2">
-            <p className="text-sm font-semibold text-muted-foreground">
+            <p className="text-base font-semibold text-gray-300">
               Technologies
             </p>
             <div className="flex flex-wrap gap-2">
@@ -49,7 +49,7 @@ const ProjectCard = ({ project }: { project: IProject }) => {
                 .map((tech, idx) => (
                   <div
                     key={idx}
-                    className="inline-flex items-center rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs font-medium"
+                    className="inline-flex items-center rounded-full border border-gray-600  px-3 py-1 text-xs font-medium"
                   >
                     <AnimatedShinyText>{tech}</AnimatedShinyText>
                   </div>

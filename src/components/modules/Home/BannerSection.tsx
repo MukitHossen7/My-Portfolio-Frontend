@@ -7,7 +7,7 @@ import { Dock, DockIcon } from "@/components/ui/dock";
 
 export default function BannerSection() {
   return (
-    <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white flex items-center justify-center px-6 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white flex items-center justify-center px-6 overflow-hidden bg-[#020617]">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center max-w-7xl w-full">
         {/* Left Side */}
         <div>

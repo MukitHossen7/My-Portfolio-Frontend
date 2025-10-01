@@ -9,7 +9,7 @@ import { IProject } from "@/types";
 const HomePage = async () => {
   const { data: projectData } = await getAllProjects();
   return (
-    <div className="bg-[#0B0E18]">
+    <div className="bg-[#020617]">
       <BannerSection />
       <AboutMeSection />
       <SkillSection />

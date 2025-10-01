@@ -31,7 +31,7 @@ const ProjectDetailsPage = async ({
   const { projectSlug } = await params;
   const { data: project } = await getProjectById(projectSlug);
   return (
-    <div>
+    <div className="bg-[#020617]">
       <ProjectDetailsCard project={project} />
     </div>
   );
