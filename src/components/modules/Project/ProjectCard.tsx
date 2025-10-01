@@ -10,7 +10,9 @@ import {
 } from "@/components/ui/card";
 import { Lens } from "@/components/ui/lens";
 import { IProject } from "@/types";
+import { ExternalLink } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const ProjectCard = ({ project }: { project: IProject }) => {
   return (
@@ -56,8 +58,44 @@ const ProjectCard = ({ project }: { project: IProject }) => {
           </div>
         </CardContent>
         <CardFooter className="space-x-4">
-          <Button>Let&apos;s go</Button>
-          <Button variant="secondary">Another time</Button>
+          {project?.liveUrl && (
+            <Button
+              asChild
+              className="group/btn relative overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-md"
+            >
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
+              >
+                <ExternalLink className="h-4 w-4 transition-transform duration-300 group-hover/btn:rotate-12" />
+                <span>Live</span>
+              </a>
+            </Button>
+          )}
+          {project?.frontendRepoUrl && (
+            <Button
+              asChild
+              className="group/btn relative overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-md"
+            >
+              <a
+                href={project?.frontendRepoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
+              >
+                <ExternalLink className="h-4 w-4 transition-transform duration-300 group-hover/btn:rotate-12" />
+                <span>Github</span>
+              </a>
+            </Button>
+          )}
+          <Link href={`/project/${project.slug}`}>
+            <Button className="group/btn relative overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-md">
+              <ExternalLink className="h-4 w-4 transition-transform duration-300 group-hover/btn:rotate-12" />
+              <span>Details</span>
+            </Button>
+          </Link>
         </CardFooter>
       </Card>
     </div>
