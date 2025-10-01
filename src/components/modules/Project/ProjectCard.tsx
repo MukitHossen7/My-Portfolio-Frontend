@@ -1,3 +1,5 @@
+"use client";
+
 import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { Button } from "@/components/ui/button";
 import {

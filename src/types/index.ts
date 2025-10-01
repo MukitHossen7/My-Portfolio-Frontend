@@ -18,3 +18,24 @@ export interface IProject {
     role: "ADMIN" | "USER";
   };
 }
+
+interface Author {
+  id: number;
+  name: string;
+  email: string;
+}
+
+export interface IBlog {
+  id: number;
+  title: string;
+  slug: string;
+  excerpt: string;
+  thumbnail: string;
+  tags: string[];
+  views: number;
+  status: string;
+  author: Author;
+  createdAt: string;
+  updateAt: string;
+  isFeatured: boolean;
+}

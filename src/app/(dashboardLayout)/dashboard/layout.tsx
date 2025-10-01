@@ -1,6 +1,6 @@
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
+    <div className="bg-[#020617]">
       {/* sidebar */}
       {children}
     </div>
