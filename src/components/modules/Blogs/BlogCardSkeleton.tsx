@@ -9,19 +9,19 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const BlogCardSkeleton = () => {
   return (
-    <Card className="bg-[#020617] shadow-md rounded-xl animate-pulse">
+    <Card className="bg-[#020617] shadow-md rounded-xl">
       <CardHeader className="p-0 ">
         <Skeleton className="h-56 w-full rounded-t-xl bg-gray-800 shimmer" />
       </CardHeader>
 
       <CardContent className="p-4">
-        <Skeleton className="h-6 w-3/4 mb-2 bg-gray-800 shimmer" />{" "}
+        <Skeleton className="h-6 w-3/4 mb-3 bg-gray-800 shimmer" />{" "}
         {/* Title */}
-        <Skeleton className="h-4 w-full mb-1 bg-gray-800 shimmer" />{" "}
+        <Skeleton className="h-4 w-full mb-2 bg-gray-800 shimmer" />{" "}
         {/* Excerpt */}
-        <Skeleton className="h-4 w-5/6 mb-1 bg-gray-800 shimmer" />
-        <Skeleton className="h-4 w-2/3 mb-3 bg-gray-800 shimmer" />
-        <div className="flex flex-wrap gap-2">
+        <Skeleton className="h-4 w-5/6 mb-2 bg-gray-800 shimmer" />
+        <Skeleton className="h-4 w-2/3  bg-gray-800 shimmer" />
+        <div className="flex flex-wrap gap-2 mt-4">
           <Skeleton className="h-6 w-16 rounded-full bg-gray-800 shimmer" />
           <Skeleton className="h-6 w-20 rounded-full bg-gray-800 shimmer" />
           <Skeleton className="h-6 w-20 rounded-full bg-gray-800 shimmer" />

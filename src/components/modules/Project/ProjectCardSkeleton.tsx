@@ -10,7 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ProjectCardSkeleton() {
   return (
-    <Card className="relative bg-[#020617] shadow-md rounded-xl animate-pulse">
+    <Card className="relative bg-[#020617] shadow-md rounded-xl">
       {/* Image Skeleton */}
       <CardHeader className="p-0">
         <Skeleton className="h-56 w-full rounded-t-xl bg-gray-800 shimmer" />
@@ -19,7 +19,7 @@ export default function ProjectCardSkeleton() {
       {/* Content */}
       <CardContent className="p-4">
         {/* Title */}
-        <Skeleton className="h-6 w-2/3 mb-3 bg-gray-800 shimmer" />
+        <Skeleton className="h-6 w-2/3 mb-4 bg-gray-800 shimmer" />
 
         {/* Description */}
         <div className="space-y-2 mb-4">

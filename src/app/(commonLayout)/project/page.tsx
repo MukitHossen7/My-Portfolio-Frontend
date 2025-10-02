@@ -2,6 +2,7 @@ import ProjectCard from "@/components/modules/Project/ProjectCard";
 
 import { getAllProjects } from "@/services/projectServices";
 import { IProject } from "@/types";
+
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

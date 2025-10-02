@@ -1,4 +1,5 @@
 import ProjectDetailsCard from "@/components/modules/Project/ProjectDetailsCard";
+
 import { getProjectById } from "@/services/projectServices";
 import { IProject } from "@/types";
 
