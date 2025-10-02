@@ -19,7 +19,7 @@ import { FaNodeJs } from "react-icons/fa";
 
 const OrbitSkillsCircle = () => {
   return (
-    <div className="relative flex h-[600px] w-full flex-col items-center justify-center overflow-hidden">
+    <div className="relative flex h-[400px] lg:h-[600px] w-full flex-col items-center justify-center overflow-hidden">
       <h3 className="absolute text-2xl font-bold text-gray-200">SKILLS</h3>
 
       {/* Outer Circle */}

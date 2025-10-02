@@ -10,7 +10,7 @@ import LightRays from "@/components/ui/LightRays";
 
 export default function BannerSection() {
   return (
-    <section className="relative bg-[#020617]  flex items-center justify-center px-6 overflow-hidden">
+    <section className="relative bg-[#020617]  flex items-center justify-center px-4 md:px-6 py-16 lg:py-0 overflow-hidden">
       <div className="absolute inset-0 z-0 pointer-events-none">
         <LightRays
           raysOrigin="top-center"
@@ -25,7 +25,7 @@ export default function BannerSection() {
           className="w-full h-full"
         />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center max-w-7xl w-full relative z-10">
+      <div className="container grid grid-cols-1 lg:grid-cols-2 gap-10 items-center max-w-7xl w-full relative z-10">
         {/* Left Side */}
         <div>
           <div className="mb-5">

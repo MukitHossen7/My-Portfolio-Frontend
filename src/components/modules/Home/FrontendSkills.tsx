@@ -14,7 +14,7 @@ const Circle = forwardRef<
     <div
       ref={ref}
       className={cn(
-        "z-10 flex items-center justify-center rounded-full border-2 bg-gradient-to-br from-white/80 to-white/60 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] shadow-gray-200",
+        "z-10 flex items-center justify-center rounded-full border border-gray-700 bg-gradient-to-br from-white/80 to-white/90 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] shadow-gray-200",
         className
       )}
     >
@@ -37,7 +37,7 @@ export function FrontendSkills() {
 
   return (
     <div
-      className="relative flex h-[300px] w-full items-center justify-center overflow-hidden mx-auto bg-[#020617]"
+      className="relative flex h-[250px] lg:h-[300px] w-full items-center justify-center overflow-hidden mx-auto bg-[#020617] px-6"
       ref={containerRef}
     >
       <div className="flex size-full max-h-[200px] max-w-lg flex-col items-stretch justify-between">
@@ -75,7 +75,9 @@ export function FrontendSkills() {
             ref={div4Ref}
             className="w-20 h-20 flex items-center justify-center bg-[#0B0E18] shadow-sm border border-gray-700 rounded-full"
           >
-            <span className="text-white font-semibold text-lg">Frontend</span>
+            <span className="text-gray-100 font-semibold text-lg">
+              Frontend
+            </span>
           </Circle>
           <Circle ref={div6Ref}>
             <Image
@@ -83,7 +85,7 @@ export function FrontendSkills() {
               alt="express.js"
               width={40}
               height={40}
-              className="object-cover p-1"
+              className="object-cover p-1 rounded-xl"
             />
           </Circle>
         </div>
@@ -103,7 +105,7 @@ export function FrontendSkills() {
               alt="express.js"
               width={40}
               height={40}
-              className="object-cover p-1"
+              className="object-cover p-1 rounded-xl"
             />
           </Circle>
         </div>
