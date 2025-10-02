@@ -1,39 +1,55 @@
 "use client";
 import { TypeAnimation } from "react-type-animation";
-import { FaLinkedin, FaEnvelope, FaCode, FaGithub } from "react-icons/fa";
+import { FaLinkedin, FaCode, FaGithub, FaAngleDown } from "react-icons/fa";
 import OrbitSkillsCircle from "./OrbitSkillsCircle";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { Dock, DockIcon } from "@/components/ui/dock";
+import { BorderBeam } from "@/components/ui/border-beam";
+import Link from "next/link";
+import LightRays from "@/components/ui/LightRays";
 
 export default function BannerSection() {
   return (
-    <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white flex items-center justify-center px-6 overflow-hidden bg-[#020617]">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center max-w-7xl w-full">
+    <section className="relative bg-[#020617]  flex items-center justify-center px-6 overflow-hidden">
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <LightRays
+          raysOrigin="top-center"
+          raysColor="#00ffff"
+          raysSpeed={1.5}
+          lightSpread={1.8}
+          rayLength={1.2}
+          followMouse={true}
+          mouseInfluence={0.1}
+          noiseAmount={0.05}
+          distortion={0.03}
+          className="w-full h-full"
+        />
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center max-w-7xl w-full relative z-10">
         {/* Left Side */}
         <div>
-          <div className="mb-4">
+          <div className="mb-5">
             <HoverBorderGradient className="bg-[#1E2234]">
-              <span className="inline-block text-white font-bold rounded-full text-base">
+              <span className="inline-block text-gray-200 font-bold rounded-full text-base">
                 👋 Hey there!
               </span>
             </HoverBorderGradient>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-            I&apos;m{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
-              Mukit Hossen
-            </span>
+          <h1 className="text-2xl text-gray-300 font-semibold leading-tight mb-2">
+            I&apos;m <span className="text-gray-300">Mukit Hossen</span>
           </h1>
 
-          <h2 className="text-xl md:text-3xl font-semibold text-purple-300 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-100 mb-4">
             <TypeAnimation
               sequence={[
-                "Backend Developer..",
+                "Backend Developer",
                 1500,
-                "MERN Stack Developer..",
+                "MERN Stack Developer",
                 1500,
-                "Full Stack Developer..",
+                "Full Stack Developer",
+                1500,
+                "NextJS Developer",
                 1500,
               ]}
               wrapper="span"
@@ -41,7 +57,7 @@ export default function BannerSection() {
               repeat={Infinity}
             />
           </h2>
-          <p className="text-gray-50 mb-6 text-lg">
+          <p className="text-gray-300 mb-7 text-lg">
             I love learning new technologies and building solutions that make a
             difference. Thanks for visiting my portfolio!{" "}
             <span className="text-yellow-400 font-bold">Happy coding..!</span>
@@ -49,35 +65,59 @@ export default function BannerSection() {
 
           {/* Buttons */}
           <div className="flex gap-4 mb-4">
+            <Link href="/contact">
+              <button className="px-5 py-2 bg-gray-100 text-gray-950 rounded-md font-medium cursor-pointer">
+                Contact Me
+              </button>
+            </Link>
             <a
-              href="#"
-              className="px-5 py-2 bg-gray-700 hover:bg-gray-600 rounded-full transition"
+              href="https://drive.google.com/file/d/1upfFc1i_jPsqbfivzTQjUAAAwYGF7uRE/view?usp=sharing"
+              download="https://drive.google.com/file/d/1upfFc1i_jPsqbfivzTQjUAAAwYGF7uRE/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative flex items-center gap-2 px-6 py-2 font-medium text-gray-100 bg-[#020617] rounded-lg transition-colors duration-300 overflow-hidden border border-gray-600 cursor-pointer"
             >
-              My Resume ⬇
-            </a>
-            <a
-              href="#contact"
-              className="px-5 py-2 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full transition"
-            >
-              Contact Me
+              <FaAngleDown className="text-lg" />
+              <span>Resume</span>
+
+              {/* Border Beam Animation */}
+              <BorderBeam
+                size={40}
+                initialOffset={20}
+                className="from-transparent via-cyan-400 to-transparent"
+                transition={{
+                  type: "spring",
+                  stiffness: 60,
+                  damping: 20,
+                }}
+              />
             </a>
           </div>
 
           {/* Social Icons */}
 
-          <div className="relative">
+          <div className="relative text-gray-200">
             <Dock iconMagnification={60} iconDistance={100}>
-              <DockIcon className="bg-black/10 dark:bg-white/10">
-                <FaGithub className="size-full" />
+              <DockIcon className="">
+                <a
+                  href="https://github.com/MukitHossen7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaGithub className="size-full text-2xl" />
+                </a>
+              </DockIcon>
+              <DockIcon className="">
+                <a
+                  href="www.linkedin.com/in/mukithossen"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaLinkedin className="size-full text-2xl" />
+                </a>
               </DockIcon>
               <DockIcon className="bg-black/10 dark:bg-white/10">
-                <FaLinkedin className="size-full" />
-              </DockIcon>
-              <DockIcon className="bg-black/10 dark:bg-white/10">
-                <FaCode className="size-full" />
-              </DockIcon>
-              <DockIcon className="bg-black/10 dark:bg-white/10">
-                <FaEnvelope className="size-full" />
+                <FaCode className="size-full text-2xl" />
               </DockIcon>
             </Dock>
           </div>
