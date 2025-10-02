@@ -10,42 +10,41 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ProjectCardSkeleton() {
   return (
-    <div className="bg-[#020617]">
-      <Card className="relative shadow-none py-6 bg-[#020617]">
-        <CardHeader>
-          {/* Image Skeleton */}
-          <Skeleton className="h-[250px] w-full rounded-md" />
-        </CardHeader>
+    <Card className="relative bg-[#020617] shadow-md rounded-xl animate-pulse">
+      {/* Image Skeleton */}
+      <CardHeader className="p-0">
+        <Skeleton className="h-56 w-full rounded-t-xl bg-gray-800 shimmer" />
+      </CardHeader>
 
-        <CardContent>
-          {/* Title */}
-          <Skeleton className="h-6 w-2/3 mb-3" />
+      {/* Content */}
+      <CardContent className="p-4">
+        {/* Title */}
+        <Skeleton className="h-6 w-2/3 mb-3 bg-gray-800 shimmer" />
 
-          {/* Description */}
-          <div className="space-y-2">
-            <Skeleton className="h-4 w-full" />
-            <Skeleton className="h-4 w-5/6" />
-            <Skeleton className="h-4 w-2/3" />
+        {/* Description */}
+        <div className="space-y-2 mb-4">
+          <Skeleton className="h-4 w-full bg-gray-800 shimmer" />
+          <Skeleton className="h-4 w-5/6 bg-gray-800 shimmer" />
+          <Skeleton className="h-4 w-2/3 bg-gray-800 shimmer" />
+        </div>
+
+        {/* Technology section */}
+        <div className="mt-4 space-y-3">
+          <Skeleton className="h-4 w-32 bg-gray-800 shimmer" />
+          <div className="flex flex-wrap gap-2">
+            <Skeleton className="h-6 w-16 rounded-full bg-gray-800 shimmer" />
+            <Skeleton className="h-6 w-20 rounded-full bg-gray-800 shimmer" />
+            <Skeleton className="h-6 w-20 rounded-full bg-gray-800 shimmer" />
+            <Skeleton className="h-6 w-24 rounded-full bg-gray-800 shimmer" />
           </div>
+        </div>
+      </CardContent>
 
-          {/* Technology section */}
-          <div className="mt-6 space-y-3">
-            <Skeleton className="h-4 w-32" />
-            <div className="flex flex-wrap gap-2">
-              <Skeleton className="h-6 w-10 rounded-full" />
-              <Skeleton className="h-6 w-20 rounded-full" />
-              <Skeleton className="h-6 w-20 rounded-full" />
-              <Skeleton className="h-6 w-20 rounded-full" />
-            </div>
-          </div>
-        </CardContent>
-
-        <CardFooter className="flex space-x-4 mt-6">
-          <Skeleton className="h-8 w-20 rounded-md" />
-          <Skeleton className="h-8 w-20 rounded-md" />
-          <Skeleton className="h-8 w-20 rounded-md" />
-        </CardFooter>
-      </Card>
-    </div>
+      {/* Footer */}
+      <CardFooter className="p-4 flex flex-wrap gap-3">
+        <Skeleton className="h-8 w-24 rounded-md bg-gray-800 shimmer" />
+        <Skeleton className="h-8 w-24 rounded-md bg-gray-800 shimmer" />
+      </CardFooter>
+    </Card>
   );
 }

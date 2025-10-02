@@ -1,6 +1,6 @@
 const BlogDetailsSkeleton = () => {
   return (
-    <div className="bg-[#020617] min-h-screen py-12 px-4 md:px-8">
+    <div className="bg-[#020617] min-h-screen py-12 px-4 lg:px-0">
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Hero Image Skeleton */}
         <div className="relative w-full h-96 rounded-md overflow-hidden shadow mb-6 bg-gray-800 shimmer" />

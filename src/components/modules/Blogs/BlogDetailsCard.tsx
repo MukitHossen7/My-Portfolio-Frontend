@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const BlogDetailsCard = ({ blog }: { blog: IBlog }) => {
   return (
-    <div className="bg-[#020617] min-h-screen py-12 px-4 md:px-8">
+    <div className="bg-[#020617] min-h-screen py-12 px-4 lg:px-0">
       <div className="max-w-6xl mx-auto">
         {/* Hero Image */}
         <div className="relative w-full h-96 rounded-md overflow-hidden shadow mb-6">

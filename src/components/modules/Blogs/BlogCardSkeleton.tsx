@@ -27,7 +27,14 @@ const BlogCardSkeleton = () => {
           <Skeleton className="h-6 w-20 rounded-full bg-gray-800 shimmer" />
           <Skeleton className="h-6 w-24 rounded-full bg-gray-800 shimmer" />
         </div>
-        <Skeleton className="h-4 w-32 mt-3 bg-gray-800 shimmer" />{" "}
+        {/* Author + Views */}
+        <div className="flex items-center justify-between mt-4">
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-24 bg-gray-800 shimmer" />
+            <Skeleton className="h-3 w-16 bg-gray-800 shimmer" />
+          </div>
+          <Skeleton className="h-4 w-10 bg-gray-800 shimmer" />
+        </div>
         {/* Author info */}
       </CardContent>
 
