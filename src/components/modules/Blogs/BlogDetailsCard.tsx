@@ -24,7 +24,7 @@ const BlogDetailsCard = ({ blog }: { blog: IBlog }) => {
         </div>
 
         {/* Title & Excerpt */}
-        <h1 className="text-3xl md:text-5xl text-gray-100 font-bold mb-4 leading-tight">
+        <h1 className="text-2xl md:text-4xl text-gray-100 font-bold mb-4 leading-tight">
           {blog?.title}
         </h1>
         <p className="text-gray-300 text-lg md:text-xl mb-8">{blog?.excerpt}</p>
