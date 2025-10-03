@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@/components/ui/button";
+
 import {
   Card,
   CardContent,
@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { IBlog } from "@/types";
-import { ExternalLink, Eye } from "lucide-react";
+import { Eye } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -68,9 +68,9 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
         </CardContent>
 
         <CardFooter className="p-4 flex justify-between items-center">
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2">
-            <ExternalLink className="h-4 w-4" /> Read More
-          </Button>
+          <p className="text-gray-300 hover:text-gray-100 text-sm hover:underline">
+            Read More
+          </p>
 
           {blog.isFeatured && (
             <span className="text-yellow-400 font-semibold text-sm">

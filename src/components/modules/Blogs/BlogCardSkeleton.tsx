@@ -39,9 +39,9 @@ const BlogCardSkeleton = () => {
       </CardContent>
 
       <CardFooter className="p-4 flex justify-between items-center">
-        <Skeleton className="h-8 w-28 rounded-md bg-gray-800 shimmer" />{" "}
+        <Skeleton className="h-4 w-16 rounded-md bg-gray-800 shimmer" />{" "}
         {/* Button */}
-        <Skeleton className="h-6 w-16 rounded-md bg-gray-800 shimmer" />{" "}
+        <Skeleton className="h-4 w-16 rounded-md bg-gray-800 shimmer" />{" "}
         {/* Featured badge */}
       </CardFooter>
     </Card>
