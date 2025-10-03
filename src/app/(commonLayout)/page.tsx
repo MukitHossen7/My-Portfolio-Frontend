@@ -3,8 +3,10 @@ import BannerSection from "@/components/modules/Home/BannerSection";
 import RecentProject from "@/components/modules/Home/RecentProject";
 import SkillSection from "@/components/modules/Home/SkillSection";
 import ProjectCard from "@/components/modules/Project/ProjectCard";
+import ProjectCardSkeleton from "@/components/modules/Project/ProjectCardSkeleton";
 import { getAllProjects } from "@/services/projectServices";
 import { IProject } from "@/types";
+import { Suspense } from "react";
 
 const HomePage = async () => {
   const { data: projectData } = await getAllProjects();
@@ -14,11 +16,23 @@ const HomePage = async () => {
       <AboutMeSection />
       <SkillSection />
       <RecentProject />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-7xl mx-auto pb-16 md:pb-20">
-        {projectData.map((project: IProject) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
-      </div>
+      <Suspense
+        fallback={
+          <div className="grid grid-cols-1 lg:grid-cols-2 px-4 md:px-6 lg:px-0 gap-6 max-w-7xl mx-auto pb-16">
+            {Array(2)
+              .fill(0)
+              .map((_, idx) => (
+                <ProjectCardSkeleton key={idx} />
+              ))}
+          </div>
+        }
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 px-4 md:px-6 lg:px-0 gap-6 max-w-7xl mx-auto pb-16">
+          {projectData.map((project: IProject) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
+      </Suspense>
     </div>
   );
 };

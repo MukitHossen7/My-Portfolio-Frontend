@@ -75,7 +75,7 @@ export default function BannerSection() {
               download="https://drive.google.com/file/d/1upfFc1i_jPsqbfivzTQjUAAAwYGF7uRE/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="relative flex items-center gap-2 px-6 py-2 font-medium text-gray-100 bg-[#020617] rounded-lg transition-colors duration-300 overflow-hidden border border-gray-600 cursor-pointer"
+              className="relative flex items-center gap-2 px-6 py-2 font-medium text-gray-100 bg-[#020617] rounded-lg transition-colors duration-300 overflow-hidden border border-gray-700 cursor-pointer"
             >
               <FaAngleDown className="text-lg" />
               <span>Resume</span>

@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 
 const SkillSection = () => {
   return (
-    <section className="pt-16 bg-[#020617]">
+    <section className="py-16  bg-[#020617]">
       <div className="container mx-auto px-4 md:px-6 lg:px-0 max-w-7xl">
         <h2 className="text-2xl md:text-3xl font-semibold text-center text-gray-100">
           Expertise

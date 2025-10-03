@@ -44,6 +44,7 @@ export default function ProjectCardSkeleton() {
       <CardFooter className="p-4 flex flex-wrap gap-3">
         <Skeleton className="h-8 w-24 rounded-md bg-gray-800 shimmer" />
         <Skeleton className="h-8 w-24 rounded-md bg-gray-800 shimmer" />
+        <Skeleton className="h-8 w-24 rounded-md bg-gray-800 shimmer" />
       </CardFooter>
     </Card>
   );
