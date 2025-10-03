@@ -4,8 +4,9 @@ import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { IProject } from "@/types";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import Image from "next/image";
+import { FaGithub } from "react-icons/fa";
 
 const ProjectDetailsCard = ({ project }: { project: IProject }) => {
   return (
@@ -13,14 +14,14 @@ const ProjectDetailsCard = ({ project }: { project: IProject }) => {
       {/* Banner */}
       <div className="relative w-full h-[400px] rounded-xl overflow-hidden shadow-lg">
         <Image
-          src={project.thumbnail}
-          alt={project.title}
+          src={project?.thumbnail}
+          alt={project?.title}
           fill
           className="object-cover"
         />
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
           <h1 className="text-3xl md:text-5xl font-bold text-gray-100 drop-shadow-lg">
-            {project.title}
+            {project?.title}
           </h1>
         </div>
       </div>
@@ -35,7 +36,7 @@ const ProjectDetailsCard = ({ project }: { project: IProject }) => {
           </CardHeader>
           <CardContent className="mt-3">
             <p className="text-gray-300 leading-relaxed">
-              {project.description}
+              {project?.description}
             </p>
           </CardContent>
         </Card>
@@ -47,7 +48,7 @@ const ProjectDetailsCard = ({ project }: { project: IProject }) => {
           </CardHeader>
           <CardContent className="mt-3">
             <ul className="space-y-3 list-disc list-inside text-gray-300">
-              {project.features.map((feature, idx) => (
+              {project?.features.map((feature, idx) => (
                 <li key={idx} className="leading-relaxed">
                   {feature}
                 </li>
@@ -64,7 +65,7 @@ const ProjectDetailsCard = ({ project }: { project: IProject }) => {
             </CardTitle>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-2 mt-3">
-            {project.technology.map((tech, idx) => (
+            {project?.technology.map((tech, idx) => (
               <div
                 key={idx}
                 className="px-3 py-1 rounded-full border border-gray-700 bg-gray-900 text-sm"
@@ -77,13 +78,13 @@ const ProjectDetailsCard = ({ project }: { project: IProject }) => {
 
         {/* Links */}
         <div className="flex flex-wrap gap-4 mt-6">
-          {project.liveUrl && (
+          {project?.liveUrl && (
             <Button
               asChild
-              className="bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2"
+              className="bg-gray-100 hover:bg-gray-50 text-gray-800 flex items-center gap-2"
             >
               <a
-                href={project.liveUrl}
+                href={project?.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -92,32 +93,32 @@ const ProjectDetailsCard = ({ project }: { project: IProject }) => {
               </a>
             </Button>
           )}
-          {project.frontendRepoUrl && (
+          {project?.frontendRepoUrl && (
             <Button
               asChild
-              className="bg-gray-700 hover:bg-gray-800 text-white flex items-center gap-2"
+              className="bg-gray-900 hover:bg-gray-800 text-gray-200 border border-gray-600 flex items-center gap-2"
             >
               <a
-                href={project.frontendRepoUrl}
+                href={project?.frontendRepoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Github className="h-4 w-4" />
+                <FaGithub className="h-4 w-4" />
                 Frontend Repo
               </a>
             </Button>
           )}
-          {project.backendRepoUrl && (
+          {project?.backendRepoUrl && (
             <Button
               asChild
-              className="bg-gray-700 hover:bg-gray-800 text-white flex items-center gap-2"
+              className="bg-gray-900 hover:bg-gray-800 text-gray-200 border border-gray-600 flex items-center gap-2"
             >
               <a
-                href={project.backendRepoUrl}
+                href={project?.backendRepoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Github className="h-4 w-4" />
+                <FaGithub className="h-4 w-4" />
                 Backend Repo
               </a>
             </Button>
@@ -126,13 +127,15 @@ const ProjectDetailsCard = ({ project }: { project: IProject }) => {
 
         {/* Owner Info */}
         <div className="border border-gray-700 shadow-2xl rounded-xl mt-8 flex items-center gap-3 p-6 hover:scale-[1.01] transition-transform duration-300">
-          <div className="w-16 h-16 rounded-full flex items-center bg-gray-600 justify-center text-gray-100 font-bold text-xl">
-            {project.owner.name[0]}
+          <div className="w-16 h-16 rounded-full flex items-center bg-gray-700 justify-center text-gray-100 font-bold text-xl">
+            {project?.owner?.name[0]}
           </div>{" "}
           ``
           <div className="flex flex-col gap-1">
-            <p className="text-gray-100 font-semibold">{project.owner.name}</p>
-            <p className="text-gray-300 text-sm">{project.owner.email}</p>
+            <p className="text-gray-100 font-semibold">
+              {project?.owner?.name}
+            </p>
+            <p className="text-gray-300 text-sm">{project?.owner?.email}</p>
           </div>
         </div>
       </div>
