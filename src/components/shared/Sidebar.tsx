@@ -27,7 +27,7 @@ const data = {
         },
         {
           title: "Manage Blog",
-          url: "#",
+          url: "/dashboard/manage-blog",
         },
         {
           title: "Create Project",
@@ -35,7 +35,7 @@ const data = {
         },
         {
           title: "Manage Project",
-          url: "/create-project",
+          url: "/dashboard/manage-project",
         },
         {
           title: "Profile",
