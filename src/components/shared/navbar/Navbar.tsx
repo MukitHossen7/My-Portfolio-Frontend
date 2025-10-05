@@ -81,6 +81,12 @@ export default function Navbar() {
                   >
                     Blog
                   </Link>
+                  <Link
+                    href="/contact"
+                    className="block py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+                  >
+                    Contact
+                  </Link>
                 </NavigationMenuList>
               </NavigationMenu>
             </PopoverContent>
@@ -106,6 +112,12 @@ export default function Navbar() {
               className="text-gray-200 text-lg font-medium  hover:text-blue-400 hover:font-normal transition-colors duration-200"
             >
               Blog
+            </Link>
+            <Link
+              href="/contact"
+              className="text-gray-200 text-lg font-medium  hover:text-blue-400 hover:font-normal transition-colors duration-200"
+            >
+              Contact
             </Link>
           </NavigationMenuList>
         </NavigationMenu>
