@@ -1,9 +1,9 @@
-const DashBoardHomePage = () => {
+const DashboardHomePage = () => {
   return (
-    <div className="bg-[#020617]">
-      <h1 className="text-2xl text-gray-700">welcome dashboard page</h1>
+    <div>
+      <h1 className="text-4xl text-gray-100">This is Dash board Home page</h1>
     </div>
   );
 };
 
-export default DashBoardHomePage;
+export default DashboardHomePage;
