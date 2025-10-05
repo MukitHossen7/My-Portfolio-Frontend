@@ -1,7 +1,9 @@
+import BlogCreateForm from "@/components/modules/Blogs/CreateBlogFrom";
+
 const CreateBlogPage = () => {
   return (
     <div>
-      <h1 className="text-2xl text-gray-100">This is Create Blog Page </h1>
+      <BlogCreateForm />
     </div>
   );
 };
