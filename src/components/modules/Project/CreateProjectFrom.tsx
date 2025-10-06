@@ -63,14 +63,18 @@ export default function ProjectCreateForm() {
         ...data,
         features: data.features.split(",").map((f) => f.trim()),
         technology: data.technology.split(",").map((t) => t.trim()),
+        frontendRepoUrl: data.frontendRepoUrl?.trim() || null,
+        backendRepoUrl: data.backendRepoUrl?.trim() || null,
+        liveUrl: data.liveUrl?.trim() || null,
       };
 
       // console.log("🚀 Project Data:", payload);
       const result = await createProjectServerAction(payload);
-      console.log(result);
-      toast.success("Blog created successfully!");
-      router.push("/dashboard/manage-project");
-      // form.reset();
+      if (result.success) {
+        toast.success("Project created successfully!");
+        router.push("/dashboard/manage-project");
+        form.reset();
+      }
     } catch (err) {
       console.error(err);
       toast.error("Failed to create project!");

@@ -56,9 +56,9 @@ export interface IProjectFormData {
   title: string;
   description: string;
   thumbnail: string;
-  frontendRepoUrl?: string;
-  backendRepoUrl?: string;
-  liveUrl?: string;
+  frontendRepoUrl?: string | null;
+  backendRepoUrl?: string | null;
+  liveUrl?: string | null;
   features: string[];
   technology: string[];
 }

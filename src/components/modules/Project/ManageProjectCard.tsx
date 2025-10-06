@@ -64,42 +64,38 @@ export default function ManageProjectCard({ project }: Props) {
 
       {/* Links */}
       <CardContent className="mt-3 flex flex-wrap gap-3 text-sm">
-        <div>
-          {project?.liveUrl && (
-            <a
-              href={project?.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:underline"
-            >
-              🌐 Live Demo
-            </a>
-          )}
-        </div>
-        <div>
-          {project?.frontendRepoUrl && (
-            <a
-              href={project?.frontendRepoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-green-400 hover:underline"
-            >
-              💻 Frontend Repo
-            </a>
-          )}
-        </div>
-        <div>
-          {project?.backendRepoUrl && (
-            <a
-              href={project?.backendRepoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-yellow-400 hover:underline"
-            >
-              💻 Backend Repo
-            </a>
-          )}
-        </div>
+        {project?.liveUrl && (
+          <a
+            href={project?.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:underline"
+          >
+            🌐 Live Demo
+          </a>
+        )}
+
+        {project?.frontendRepoUrl && (
+          <a
+            href={project?.frontendRepoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-green-400 hover:underline"
+          >
+            💻 Frontend Repo
+          </a>
+        )}
+
+        {project?.backendRepoUrl && (
+          <a
+            href={project?.backendRepoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-yellow-400 hover:underline"
+          >
+            💻 Backend Repo
+          </a>
+        )}
       </CardContent>
 
       {/* Buttons */}

@@ -52,10 +52,12 @@ export default function BlogCreateForm() {
         ...data,
         tags: data.tags.split(",").map((tag) => tag.trim()),
       };
-      await createBlogServerAction(payload);
-      toast.success("Blog created successfully!");
-      router.push("/dashboard/manage-blog");
-      form.reset();
+      const result = await createBlogServerAction(payload);
+      if (result.success) {
+        toast.success("Blog created successfully!");
+        router.push("/dashboard/manage-blog");
+        form.reset();
+      }
     } catch (err) {
       console.error(err);
       toast.error("Failed to create blog");

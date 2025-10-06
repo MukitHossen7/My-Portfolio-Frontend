@@ -33,7 +33,7 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
             {blog?.title}
           </CardTitle>
           <CardDescription className="text-gray-300 mb-4">
-            {blog?.excerpt}
+            {blog?.excerpt.slice(0, 70)} ...
           </CardDescription>
 
           <div className="flex flex-wrap gap-2 mb-5">
@@ -52,7 +52,7 @@ const BlogCard = ({ blog }: { blog: IBlog }) => {
               <p>
                 By{" "}
                 <span className="font-semibold text-gray-100">
-                  {blog.author.name}
+                  {blog?.author?.name}
                 </span>{" "}
               </p>
               <p className="text-xs">

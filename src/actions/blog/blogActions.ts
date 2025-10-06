@@ -18,7 +18,6 @@ export const createBlogServerAction = async (blogData: IBlogFormData) => {
 
     // credentials: "include",
   });
-
   if (!res.ok) throw new Error("Failed to create blog");
   revalidateTag("BLOG");
   return await res.json();
