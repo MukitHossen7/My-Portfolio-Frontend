@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { createBlogServerAction } from "@/actions/blog/blogActions";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -11,8 +12,10 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Form } from "@/components/ui/form";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
-// ✅ Schema (tags as string, will split to array on submit)
+// 🧩 Zod Schema
 const blogSchema = z.object({
   title: z.string().min(5, "Title must be at least 5 characters."),
   excerpt: z.string().min(10, "Excerpt must be at least 10 characters."),
@@ -26,6 +29,7 @@ const blogSchema = z.object({
 type BlogFormData = z.infer<typeof blogSchema>;
 
 export default function BlogCreateForm() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const form = useForm<BlogFormData>({
@@ -44,26 +48,17 @@ export default function BlogCreateForm() {
   const onSubmit = async (data: BlogFormData) => {
     setLoading(true);
     try {
-      // Convert comma separated tags string into array
       const payload = {
         ...data,
         tags: data.tags.split(",").map((tag) => tag.trim()),
       };
-
-      console.log("Payload to submit:", payload);
-
-      // TODO: replace with your API call
-      // const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blogs`, {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(payload),
-      // });
-
-      // if (!res.ok) throw new Error("Failed to create blog");
-
+      await createBlogServerAction(payload);
+      toast.success("Blog created successfully!");
+      router.push("/dashboard/manage-blog");
       form.reset();
     } catch (err) {
       console.error(err);
+      toast.error("Failed to create blog");
     } finally {
       setLoading(false);
     }

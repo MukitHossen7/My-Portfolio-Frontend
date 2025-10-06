@@ -40,3 +40,13 @@ export interface IBlog {
   updateAt: string;
   isFeatured: boolean;
 }
+
+export interface IBlogFormData {
+  title: string;
+  excerpt: string;
+  content: string;
+  thumbnail: string;
+  tags: string[];
+  isFeatured: boolean;
+  status: "PUBLISHED" | "ARCHIVED" | "DRAFT";
+}

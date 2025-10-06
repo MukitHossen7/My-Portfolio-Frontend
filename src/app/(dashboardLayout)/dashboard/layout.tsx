@@ -4,6 +4,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/shared/Sidebar";
+import { Toaster } from "@/components/ui/sonner";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -16,6 +17,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           </header>
           <div className="flex flex-1 flex-col gap-4 p-4 bg-[#020617]">
             {children}
+            <Toaster richColors />
             {/* <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" /> */}
           </div>
         </SidebarInset>

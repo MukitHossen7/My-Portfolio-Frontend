@@ -1,7 +1,17 @@
-const ManageBlogPage = () => {
+import ManageBlogCard, {
+  Blog,
+} from "@/components/modules/Blogs/ManageBlogCard";
+import { getAllBlogs } from "@/services/blogServices";
+
+const ManageBlogPage = async () => {
+  const { data: blogs } = await getAllBlogs();
   return (
-    <div>
-      <h1 className="text-2xl text-gray-100">This is Manage Blog Page</h1>
+    <div className="py-10">
+      <div className="grid grid-cols-1 gap-6">
+        {blogs.map((blog: Blog) => (
+          <ManageBlogCard key={blog.id} blog={blog} />
+        ))}
+      </div>
     </div>
   );
 };
