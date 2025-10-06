@@ -1,7 +1,11 @@
+import ManageBlogCardSkeleton from "@/components/modules/Blogs/ManageBlogCardSkeleton";
+
 const ManageBlogLoading = () => {
   return (
-    <div>
-      <h1 className="text-3xl text-gray-100">Loading....</h1>
+    <div className="grid grid-cols-1 gap-6 py-10">
+      {Array.from({ length: 4 }).map((_, idx) => (
+        <ManageBlogCardSkeleton key={idx} />
+      ))}
     </div>
   );
 };
