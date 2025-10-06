@@ -9,7 +9,7 @@ const ManageBlogPage = async () => {
   return (
     <div className="py-10">
       <div className="grid grid-cols-1 gap-6">
-        {blogs.map((blog: Blog) => (
+        {blogs?.map((blog: Blog) => (
           <ManageBlogCard key={blog.id} blog={blog} />
         ))}
       </div>

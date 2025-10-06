@@ -10,6 +10,9 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
+import { createProjectServerAction } from "@/actions/project/projectAction";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 // Zod Validation Schema
 const projectSchema = z.object({
@@ -36,6 +39,7 @@ const projectSchema = z.object({
 type ProjectFormData = z.infer<typeof projectSchema>;
 
 export default function ProjectCreateForm() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const form = useForm<ProjectFormData>({
@@ -61,21 +65,15 @@ export default function ProjectCreateForm() {
         technology: data.technology.split(",").map((t) => t.trim()),
       };
 
-      console.log("🚀 Project Data:", payload);
-
-      // Example API call
-      // const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/projects`, {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(payload),
-      // });
-
-      // if (!res.ok) throw new Error("Failed to create project");
-      // toast.success("✅ Project created successfully!");
-      form.reset();
+      // console.log("🚀 Project Data:", payload);
+      const result = await createProjectServerAction(payload);
+      console.log(result);
+      toast.success("Blog created successfully!");
+      router.push("/dashboard/manage-project");
+      // form.reset();
     } catch (err) {
       console.error(err);
-      // toast.error("❌ Failed to create project!");
+      toast.error("Failed to create project!");
     } finally {
       setLoading(false);
     }

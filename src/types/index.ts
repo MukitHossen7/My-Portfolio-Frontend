@@ -50,3 +50,15 @@ export interface IBlogFormData {
   isFeatured: boolean;
   status: "PUBLISHED" | "ARCHIVED" | "DRAFT";
 }
+
+export interface IProjectFormData {
+  id?: number;
+  title: string;
+  description: string;
+  thumbnail: string;
+  frontendRepoUrl?: string;
+  backendRepoUrl?: string;
+  liveUrl?: string;
+  features: string[];
+  technology: string[];
+}
