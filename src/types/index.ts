@@ -48,7 +48,7 @@ export interface IBlogFormData {
   thumbnail: string;
   tags: string[];
   isFeatured: boolean;
-  status: "PUBLISHED" | "ARCHIVED" | "DRAFT";
+  status: string;
 }
 
 export interface IProjectFormData {

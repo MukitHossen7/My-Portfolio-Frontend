@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-// import { updateBlogServerAction } from "@/actions/blog.server";
 import { useRouter } from "next/navigation";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -15,6 +14,8 @@ import {
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
+import { updateBlogServerAction } from "@/actions/blog/blogActions";
+import { toast } from "sonner";
 
 interface Blog {
   slug: string;
@@ -46,14 +47,24 @@ export default function BlogUpdateForm({ blog }: { blog: Blog }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
+    const updateData = {
+      title: formData.title,
+      excerpt: formData.excerpt,
+      content: formData.content,
+      thumbnail: formData.thumbnail,
+      isFeatured: formData.isFeatured,
+      tags: formData.tags,
+      status: formData.status,
+    };
     try {
-      // await updateBlogServerAction(formData.slug, formData);
-      // alert("✅ Blog updated successfully!");
-      // router.push("/blogs");
+      const result = await updateBlogServerAction(formData.slug, updateData);
+      if (result.success) {
+        toast.success("Blog updated successfully!");
+        router.back();
+      }
     } catch (err) {
+      toast.error("Failed to update blog");
       console.error(err);
-      alert("❌ Failed to update blog");
     }
   };
 
