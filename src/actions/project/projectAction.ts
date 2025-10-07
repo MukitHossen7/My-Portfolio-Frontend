@@ -24,6 +24,26 @@ export const createProjectServerAction = async (
 };
 
 // ---------------- UPDATE ----------------
+export const updateProjectServerAction = async (
+  slug: string,
+  updateProjectData: IProjectFormData
+) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_API}/project/${slug}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updateProjectData),
+      // credentials: "include",
+    }
+  );
+
+  if (!res.ok) throw new Error("Failed to update project");
+  revalidateTag("PROJECT");
+  return await res.json();
+};
 
 // ---------------- DELETE ----------------
 export const deleteProjectServerAction = async (slug: string) => {

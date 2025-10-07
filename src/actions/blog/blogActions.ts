@@ -25,7 +25,6 @@ export const createBlogServerAction = async (blogData: IBlogFormData) => {
 };
 
 // ---------------- UPDATE ----------------
-
 export const updateBlogServerAction = async (
   slug: string,
   updateBlogData: IBlogFormData
