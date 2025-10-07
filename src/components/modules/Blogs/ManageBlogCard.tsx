@@ -11,9 +11,11 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-
+import { MdDeleteForever } from "react-icons/md";
+import { DeleteAlertDialog } from "@/components/shared/DeleteAlertDialog";
 export interface Blog {
   id?: number;
+  slug?: string;
   title: string;
   excerpt: string;
   content: string;
@@ -23,8 +25,6 @@ export interface Blog {
   status: string;
   createdAt: string;
   updateAt: string;
-  onDelete?: (id: number) => void;
-  onUpdate?: (id: number) => void;
 }
 
 interface Props {
@@ -32,6 +32,10 @@ interface Props {
 }
 
 export default function ManageBlogCard({ blog }: Props) {
+  const handleDeleteBlog = (slug: string) => {
+    console.log("blog slug", slug);
+  };
+
   return (
     <Card className="bg-[#020617] border border-gray-800 shadow-md w-full  mx-auto py-6">
       <CardHeader className="flex flex-col md:flex-row md:items-start gap-4">
@@ -78,16 +82,18 @@ export default function ManageBlogCard({ blog }: Props) {
       </CardContent>
 
       <CardFooter className="flex justify-end gap-3 mt-2">
-        <Button
-          className="bg-red-700 hover:bg-red-600 text-gray-100"
-          onClick={() => blog.onDelete && blog.onDelete(blog.id!)}
-        >
-          Delete
-        </Button>
-        <Button
-          className="bg-blue-700 hover:bg-blue-600 text-gray-100"
-          onClick={() => blog.onUpdate && blog.onUpdate(blog.id!)}
-        >
+        <DeleteAlertDialog
+          onConfirm={() => handleDeleteBlog(blog?.slug as string)}
+          triggerButton={
+            <button className="flex items-center bg-gray-950 hover:bg-gray-900 border border-gray-800 px-3 py-2 rounded-md">
+              <MdDeleteForever className="text-red-600 text-2xl" />
+            </button>
+          }
+          title="Are you absolutely sure?"
+          description="This action cannot be undone. It will permanently delete this blog post."
+        />
+
+        <Button className="bg-gray-200 hover:bg-gray-100 text-gray-800 font-semibold">
           Update
         </Button>
       </CardFooter>
