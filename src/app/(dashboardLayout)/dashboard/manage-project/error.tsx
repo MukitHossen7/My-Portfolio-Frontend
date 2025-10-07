@@ -15,12 +15,12 @@ export default function ErrorPage({
   }, [error]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 px-4">
-      <div className="max-w-md rounded-lg border bg-white p-6 shadow-sm">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[#020617] px-4">
+      <div className="max-w-md rounded-lg border border-gray-800 bg-[#020617] p-6 shadow-sm">
         <h2 className="text-xl font-semibold text-red-600">
           Something went wrong!
         </h2>
-        <p className="mt-2 text-sm text-gray-600">
+        <p className="mt-2 text-sm text-gray-300">
           {error.message || "An unexpected error occurred."}
         </p>
 
@@ -29,7 +29,7 @@ export default function ErrorPage({
         )}
 
         <div className="mt-4">
-          <Button variant="default" onClick={() => reset()}>
+          <Button variant="outline" onClick={() => reset()}>
             Try again
           </Button>
         </div>

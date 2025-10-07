@@ -2,6 +2,7 @@
 import { IProjectFormData } from "@/types";
 import { revalidateTag } from "next/cache";
 
+// ---------------- CREATE ----------------
 export const createProjectServerAction = async (
   projectData: IProjectFormData
 ) => {
@@ -18,6 +19,25 @@ export const createProjectServerAction = async (
     // credentials: "include",
   });
   if (!res.ok) throw new Error("Failed to create project");
+  revalidateTag("PROJECT");
+  return await res.json();
+};
+
+// ---------------- UPDATE ----------------
+
+// ---------------- DELETE ----------------
+export const deleteProjectServerAction = async (slug: string) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_API}/project/${slug}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // credentials: "include",
+    }
+  );
+  if (!res.ok) throw new Error("Failed to delete blog");
   revalidateTag("PROJECT");
   return await res.json();
 };

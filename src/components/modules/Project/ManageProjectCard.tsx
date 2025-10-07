@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import Image from "next/image";
@@ -11,12 +12,29 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { IProjectFormData } from "@/types";
+import { MdDeleteForever } from "react-icons/md";
+import Link from "next/link";
+import { DeleteAlertDialog } from "@/components/shared/DeleteAlertDialog";
+import { toast } from "sonner";
+import { deleteProjectServerAction } from "@/actions/project/projectAction";
 
 interface Props {
   project: IProjectFormData;
 }
 
 export default function ManageProjectCard({ project }: Props) {
+  //delete project
+  const handleDeleteProject = async (slug: string) => {
+    try {
+      const result = await deleteProjectServerAction(slug);
+      if (result.success) {
+        toast.success("Project deleted successfully");
+      }
+    } catch (error: any) {
+      toast.error(`${error?.message} ?? Failed to delete project`);
+      console.error(error);
+    }
+  };
   return (
     <Card className="bg-[#020617] border border-gray-800 shadow-md w-full  mx-auto py-6 rounded-md transition-transform hover:scale-[1.01] duration-200">
       {/* Thumbnail + Title */}
@@ -100,12 +118,22 @@ export default function ManageProjectCard({ project }: Props) {
 
       {/* Buttons */}
       <CardFooter className="flex justify-end gap-3 mt-4">
-        <Button className="bg-red-700 hover:bg-red-600 text-gray-100">
-          Delete
-        </Button>
-        <Button className="bg-blue-700 hover:bg-blue-600 text-gray-100">
-          Update
-        </Button>
+        <DeleteAlertDialog
+          onConfirm={() => handleDeleteProject(project?.slug as string)}
+          triggerButton={
+            <button className="flex items-center bg-gray-950 hover:bg-gray-900 border border-gray-800 px-3 py-2 rounded-md">
+              <MdDeleteForever className="text-red-600 text-2xl" />
+            </button>
+          }
+          title="Are you absolutely sure?"
+          description="This action cannot be undone. It will permanently delete this project"
+        />
+
+        <Link href={`/dashboard/manage-project/${project?.slug as string}`}>
+          <Button className="bg-gray-200 hover:bg-gray-100 text-gray-800 font-semibold">
+            Update
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   );
