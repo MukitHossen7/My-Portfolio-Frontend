@@ -16,6 +16,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { DeleteAlertDialog } from "@/components/shared/DeleteAlertDialog";
 import { toast } from "sonner";
 import { deleteBlogServerAction } from "@/actions/blog/blogActions";
+import Link from "next/link";
 export interface Blog {
   id?: number;
   slug?: string;
@@ -104,9 +105,11 @@ export default function ManageBlogCard({ blog }: Props) {
           description="This action cannot be undone. It will permanently delete this blog post."
         />
 
-        <Button className="bg-gray-200 hover:bg-gray-100 text-gray-800 font-semibold">
-          Update
-        </Button>
+        <Link href={`/dashboard/manage-blog/${blog?.slug as string}`}>
+          <Button className="bg-gray-200 hover:bg-gray-100 text-gray-800 font-semibold">
+            Update
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   );
