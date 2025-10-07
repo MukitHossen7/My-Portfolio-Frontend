@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React from "react";
@@ -13,6 +14,8 @@ import {
 import { Label } from "@/components/ui/label";
 import { MdDeleteForever } from "react-icons/md";
 import { DeleteAlertDialog } from "@/components/shared/DeleteAlertDialog";
+import { toast } from "sonner";
+import { deleteBlogServerAction } from "@/actions/blog/blogActions";
 export interface Blog {
   id?: number;
   slug?: string;
@@ -32,8 +35,16 @@ interface Props {
 }
 
 export default function ManageBlogCard({ blog }: Props) {
-  const handleDeleteBlog = (slug: string) => {
-    console.log("blog slug", slug);
+  const handleDeleteBlog = async (slug: string) => {
+    try {
+      const result = await deleteBlogServerAction(slug);
+      if (result.success) {
+        toast.success("Blog deleted successfully");
+      }
+    } catch (error: any) {
+      toast.error(`${error?.message} ?? Failed to delete blog`);
+      console.error(error);
+    }
   };
 
   return (
