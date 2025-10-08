@@ -12,7 +12,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <SidebarProvider>
         <AppSidebar />
         <SidebarInset>
-          <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 bg-[#020617] text-gray-200">
+          <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 bg-[#020617] text-gray-200  border-gray-800">
             <SidebarTrigger className="-ml-1" />
           </header>
           <div className="flex flex-1 flex-col gap-4 p-4 bg-[#020617]">
