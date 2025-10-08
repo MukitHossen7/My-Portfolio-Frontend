@@ -1,4 +1,4 @@
-import * as React from "react";
+"use client";
 
 import {
   Sidebar,
@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { LogOut } from "lucide-react";
+import logo from "../../assets/icons/logo.png";
+import Image from "next/image";
 
 // This is sample data.
 const data = {
@@ -47,8 +49,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <div className="bg-[#020617] flex flex-col h-full">
       <Sidebar {...props} className="flex flex-col h-full">
         <Link href="/">
-          <SidebarHeader className="bg-[#020617] text-gray-200">
-            MH
+          <SidebarHeader className="bg-[#020617] pl-4">
+            <Image
+              src={logo}
+              alt="Logo"
+              className="w-9 h-auto object-contain invert brightness-20"
+            />
           </SidebarHeader>
         </Link>
 

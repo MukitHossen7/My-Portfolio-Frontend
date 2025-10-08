@@ -245,7 +245,7 @@ export default function ProjectCreateForm() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gray-800 hover:bg-gray-700 text-gray-100 mt-4"
+                className="w-full bg-gray-200 hover:bg-gray-100 text-gray-950 mt-4"
               >
                 {loading ? "Creating..." : "Create Project"}
               </Button>

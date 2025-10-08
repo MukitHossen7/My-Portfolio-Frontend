@@ -11,7 +11,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import Image from "next/image";
 import Link from "next/link";
+import logo from "../../../assets/icons/logo.png";
 
 export default function Navbar() {
   return (
@@ -19,7 +21,11 @@ export default function Navbar() {
       <div className="flex h-16 items-center justify-between gap-4">
         {/* Left side */}
         <Link href="/" className="text-2xl font-bold text-gray-300">
-          Portfolio
+          <Image
+            src={logo}
+            alt="Logo"
+            className="w-9 h-auto object-contain invert brightness-20"
+          />
         </Link>
         <div className="flex flex-1  gap-2">
           {/* Mobile menu trigger */}
