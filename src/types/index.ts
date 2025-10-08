@@ -1,3 +1,14 @@
+export interface IUser {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  picture: string | null;
+  isStatus: string;
+  isVerified: boolean;
+  createdAt: string;
+}
+
 export interface IProject {
   id: number;
   title: string;

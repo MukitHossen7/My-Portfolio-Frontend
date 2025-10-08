@@ -19,7 +19,7 @@ import { LogOut } from "lucide-react";
 const data = {
   navMain: [
     {
-      title: "Dashboard",
+      title: "Profile",
       items: [
         {
           title: "Create Blog",
@@ -36,10 +36,6 @@ const data = {
         {
           title: "Manage Project",
           url: "/dashboard/manage-project",
-        },
-        {
-          title: "Profile",
-          url: "/create-project",
         },
       ],
     },
