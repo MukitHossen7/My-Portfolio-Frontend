@@ -18,7 +18,7 @@ const user: IUser = {
 
 const DashboardHomePage = () => {
   return (
-    <div className="bg-[#020617] min-h-svh flex justify-center items-center">
+    <div className="bg-[#020617] min-h-svh flex justify-center items-center px-4 md:px-0">
       <Card className="w-full max-w-md  bg-[#020617] border border-gray-800 shadow-xl rounded-xl py-6">
         <CardHeader className="flex flex-col items-center gap-3 text-center">
           <div className="relative w-28 h-28 rounded-full overflow-hidden border-2 border-gray-700 shadow-md">

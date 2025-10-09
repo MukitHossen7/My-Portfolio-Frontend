@@ -67,7 +67,7 @@ export default function BlogCreateForm() {
   };
 
   return (
-    <div className="bg-[#020617] flex items-center justify-center py-10">
+    <div className="bg-[#020617] flex items-center justify-center py-10 px-4 lg:px-10">
       <Card className="w-full max-w-3xl bg-[#020617] border border-gray-800 shadow-md py-6">
         <CardHeader>
           <CardTitle className="text-gray-100 text-xl md:text-2xl text-center font-semibold">

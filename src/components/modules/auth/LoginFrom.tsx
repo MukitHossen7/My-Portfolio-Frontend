@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
+import Cookies from "js-cookie";
 // import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -42,13 +43,12 @@ const LoginFrom = () => {
         email: values.email,
         password: values.password,
       };
-      console.log(loginData);
-      const result = await createLogin(values);
+      const result = await createLogin(loginData);
       if (result.success) {
         toast.success("Logged In Successful");
         router.push("/");
+        Cookies.set("accessToken", result.data.accessToken);
       }
-      console.log(result);
     } catch (error) {
       console.error(error);
       toast.error("Logged In Failed");
