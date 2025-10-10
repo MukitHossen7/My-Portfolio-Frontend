@@ -42,9 +42,9 @@ export default function ProjectUpdateForm({ project }: { project: Project }) {
       title: formData.title,
       description: formData.description,
       thumbnail: formData.thumbnail,
-      frontendRepoUrl: formData.frontendRepoUrl,
-      backendRepoUrl: formData.backendRepoUrl,
-      liveUrl: formData.liveUrl,
+      frontendRepoUrl: formData.frontendRepoUrl?.trim() || null,
+      backendRepoUrl: formData.backendRepoUrl?.trim() || null,
+      liveUrl: formData.liveUrl?.trim() || null,
       features: formData.features.split(",").map((f) => f.trim()),
       technology: formData.technology.split(",").map((t) => t.trim()),
     };
