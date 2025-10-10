@@ -1,22 +1,28 @@
 "use server";
-
+import { getAdminData } from "@/helpers/getAdminData";
 import { IBlogFormData } from "@/types";
 import { revalidateTag } from "next/cache";
+import { cookies } from "next/headers";
 
 // ---------------- CREATE ----------------
 export const createBlogServerAction = async (blogData: IBlogFormData) => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("accessToken")?.value;
+  if (!token) throw new Error("No token found");
+  const admin = await getAdminData();
+
   const blogPayload = {
     ...blogData,
-    authorId: 1,
+    authorId: admin?.id,
   };
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(blogPayload),
-
     // credentials: "include",
   });
   if (!res.ok) throw new Error("Failed to create blog");
@@ -29,10 +35,15 @@ export const updateBlogServerAction = async (
   slug: string,
   updateBlogData: IBlogFormData
 ) => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("accessToken")?.value;
+  if (!token) throw new Error("No token found");
+
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog/${slug}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(updateBlogData),
     // credentials: "include",
@@ -45,10 +56,15 @@ export const updateBlogServerAction = async (
 
 // ---------------- DELETE ----------------
 export const deleteBlogServerAction = async (slug: string) => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("accessToken")?.value;
+  if (!token) throw new Error("No token found");
+
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog/${slug}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     // credentials: "include",
   });

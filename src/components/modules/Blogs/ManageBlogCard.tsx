@@ -43,7 +43,7 @@ export default function ManageBlogCard({ blog }: Props) {
         toast.success("Blog deleted successfully");
       }
     } catch (error: any) {
-      toast.error(`${error?.message} ?? Failed to delete blog`);
+      toast.error(`${error?.message}`);
       console.error(error);
     }
   };
