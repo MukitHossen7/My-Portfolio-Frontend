@@ -1,6 +1,5 @@
 "use client";
 
-// import { createLogin } from "@/actions/auth";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -13,12 +12,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import Cookies from "js-cookie";
-// import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createLogin } from "@/actions/auth/auth";
-import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.email(),
@@ -28,7 +25,6 @@ const formSchema = z.object({
 });
 
 const LoginFrom = () => {
-  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -45,17 +41,17 @@ const LoginFrom = () => {
       };
       const result = await createLogin(loginData);
       if (result.success) {
-        toast.success("Logged In Successful");
-        router.push("/");
         Cookies.set("accessToken", result.data.accessToken, {
           secure: true,
           sameSite: "none",
           path: "/",
         });
+        toast.success("Logged In Successful");
+        window.location.href = "/dashboard";
       }
     } catch (error) {
       console.error(error);
-      toast.error("Logged In Failed");
+      toast.error("Login Failed");
     }
   };
 
