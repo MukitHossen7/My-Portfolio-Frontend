@@ -47,7 +47,11 @@ const LoginFrom = () => {
       if (result.success) {
         toast.success("Logged In Successful");
         router.push("/");
-        Cookies.set("accessToken", result.data.accessToken);
+        Cookies.set("accessToken", result.data.accessToken, {
+          secure: true,
+          sameSite: "none",
+          path: "/",
+        });
       }
     } catch (error) {
       console.error(error);
