@@ -1,28 +1,26 @@
-import { NextRequest, NextResponse } from "next/server";
-import { jwtVerify } from "jose";
+// middleware.ts
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import jwt from "jsonwebtoken";
 
-export async function middleware(req: NextRequest) {
+export function middleware(req: NextRequest) {
   const token = req.cookies.get("accessToken")?.value;
-  console.log(token);
+
   if (!token) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
+
   try {
-    const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
-    const { payload } = await jwtVerify(token, secret);
-    if (payload.role !== "ADMIN") {
-      return NextResponse.redirect(new URL("/unauthorized", req.url));
-    }
-  } catch (error) {
-    console.error("Invalid Token:", error);
+    jwt.verify(token, process.env.JWT_SECRET!);
+    return NextResponse.next();
+  } catch (err) {
+    console.log(err);
     return NextResponse.redirect(new URL("/login", req.url));
   }
-
-  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*"],
+  matcher: ["/dashboard/:path*"], // প্রাইভেট রাউট
 };
 
 // export const config = {

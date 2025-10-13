@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
-import Cookies from "js-cookie";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -41,13 +40,7 @@ const LoginFrom = () => {
       };
       const result = await createLogin(loginData);
       if (result.success) {
-        Cookies.set("accessToken", result.data.accessToken, {
-          secure: true,
-          sameSite: "none",
-          path: "/",
-        });
         toast.success("Logged In Successful");
-        window.location.href = "/dashboard";
       }
     } catch (error) {
       console.error(error);
