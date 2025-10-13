@@ -3,6 +3,7 @@ import { getAdminData } from "@/helpers/getAdminData";
 import { IProjectFormData } from "@/types";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 // ---------------- CREATE ----------------
 export const createProjectServerAction = async (
@@ -10,7 +11,9 @@ export const createProjectServerAction = async (
 ) => {
   const cookieStore = await cookies();
   const token = cookieStore.get("accessToken")?.value;
-  if (!token) throw new Error("No token found");
+  if (!token) {
+    redirect("/login");
+  }
 
   const admin = await getAdminData();
 
@@ -39,8 +42,9 @@ export const updateProjectServerAction = async (
 ) => {
   const cookieStore = await cookies();
   const token = cookieStore.get("accessToken")?.value;
-  if (!token) throw new Error("No token found");
-
+  if (!token) {
+    redirect("/login");
+  }
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_API}/project/${slug}`,
     {
@@ -63,7 +67,9 @@ export const updateProjectServerAction = async (
 export const deleteProjectServerAction = async (slug: string) => {
   const cookieStore = await cookies();
   const token = cookieStore.get("accessToken")?.value;
-  if (!token) throw new Error("No token found");
+  if (!token) {
+    redirect("/login");
+  }
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_API}/project/${slug}`,

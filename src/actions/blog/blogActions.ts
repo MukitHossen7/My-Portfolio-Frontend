@@ -3,14 +3,16 @@ import { getAdminData } from "@/helpers/getAdminData";
 import { IBlogFormData } from "@/types";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 // ---------------- CREATE ----------------
 export const createBlogServerAction = async (blogData: IBlogFormData) => {
   const cookieStore = await cookies();
   const token = cookieStore.get("accessToken")?.value;
-  if (!token) throw new Error("No token found");
+  if (!token) {
+    redirect("/login");
+  }
   const admin = await getAdminData();
-
   const blogPayload = {
     ...blogData,
     authorId: admin?.id,
@@ -37,8 +39,9 @@ export const updateBlogServerAction = async (
 ) => {
   const cookieStore = await cookies();
   const token = cookieStore.get("accessToken")?.value;
-  if (!token) throw new Error("No token found");
-
+  if (!token) {
+    redirect("/login");
+  }
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog/${slug}`, {
     method: "PATCH",
     headers: {
@@ -58,7 +61,10 @@ export const updateBlogServerAction = async (
 export const deleteBlogServerAction = async (slug: string) => {
   const cookieStore = await cookies();
   const token = cookieStore.get("accessToken")?.value;
-  if (!token) throw new Error("No token found");
+
+  if (!token) {
+    redirect("/login");
+  }
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog/${slug}`, {
     method: "DELETE",
