@@ -1,6 +1,6 @@
-import { cookies } from "next/headers";
-import jwt, { JwtPayload } from "jsonwebtoken";
-import { redirect } from "next/navigation";
+// import { cookies } from "next/headers";
+// import jwt, { JwtPayload } from "jsonwebtoken";
+// import { redirect } from "next/navigation";
 import {
   SidebarInset,
   SidebarProvider,
@@ -9,30 +9,30 @@ import {
 import { AppSidebar } from "../../../components/shared/Sidebar";
 import { Toaster } from "../../../components/ui/sonner";
 
-const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("token")?.value;
-  console.log(token);
-  if (!token) {
-    redirect("/login");
-  }
+const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+  // const cookieStore = await cookies();
+  // const token = cookieStore.get("token")?.value;
+  // console.log(token);
+  // if (!token) {
+  //   redirect("/login");
+  // }
 
-  let decodedRole: JwtPayload | null = null;
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!);
-    if (typeof decoded === "object" && decoded !== null) {
-      decodedRole = decoded as JwtPayload;
-    } else {
-      redirect("/login");
-    }
-  } catch (err) {
-    console.log(err);
-    redirect("/login");
-  }
+  // let decodedRole: JwtPayload | null = null;
+  // try {
+  //   const decoded = jwt.verify(token, process.env.JWT_SECRET!);
+  //   if (typeof decoded === "object" && decoded !== null) {
+  //     decodedRole = decoded as JwtPayload;
+  //   } else {
+  //     redirect("/login");
+  //   }
+  // } catch (err) {
+  //   console.log(err);
+  //   redirect("/login");
+  // }
 
-  if (!decodedRole || decodedRole.role !== "ADMIN") {
-    redirect("/login");
-  }
+  // if (!decodedRole || decodedRole.role !== "ADMIN") {
+  //   redirect("/login");
+  // }
 
   return (
     <div className="bg-[#020617]">
