@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createLogin } from "@/actions/auth/auth";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.email(),
@@ -24,6 +25,7 @@ const formSchema = z.object({
 });
 
 const LoginFrom = () => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,6 +43,7 @@ const LoginFrom = () => {
       const result = await createLogin(loginData);
       if (result.success) {
         toast.success("Logged In Successful");
+        router.push("/");
       }
     } catch (error) {
       console.error(error);
