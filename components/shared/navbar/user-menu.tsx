@@ -1,4 +1,5 @@
-import { BoltIcon, LogOutIcon } from "lucide-react";
+"use client";
+import { BoltIcon } from "lucide-react";
 import Link from "next/link";
 import {
   DropdownMenu,
@@ -18,51 +19,45 @@ export default function UserMenu() {
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="h-auto p-0 hover:bg-transparent focus:ring-2 focus:ring-blue-500 rounded-full"
+          className="h-auto p-0 hover:bg-transparent focus:ring focus:ring-gray-700-500 rounded-full"
         >
-          <Avatar className="w-9 h-9 border-2 border-transparent hover:border-blue-500 transition-colors duration-200">
-            <AvatarImage src="/avatar.jpg" alt="Profile image" />{" "}
+          <Avatar className="w-10 h-10 border border-transparent hover:border-gray-700-500 transition-colors duration-200">
+            <AvatarImage
+              src="/male-avatar-boy-face-man-user-7.svg"
+              alt="Profile image"
+            />{" "}
             {/* Updated path */}
-            <AvatarFallback className="bg-blue-500 text-white dark:bg-blue-600">
+            <AvatarFallback className="bg-gray-800 text-gray-200">
               KK
             </AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="max-w-64 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-lg text-gray-900 dark:text-gray-100"
+        className="max-w-64 bg-[#020617] dark:bg-gray-800 border-gray-800 shadow-lg"
         align="end"
       >
         <DropdownMenuLabel className="flex min-w-0 flex-col p-3">
-          <span className="text-foreground truncate text-sm font-medium">
+          <span className="text-gray-100 truncate text-sm font-medium">
             Keith Kennedy
           </span>
-          <span className="text-muted-foreground truncate text-xs font-normal  dark:text-gray-400">
+          <span className="text-gray-300 truncate text-xs font-normal  dark:text-gray-400">
             k.kennedy@originui.com
           </span>
         </DropdownMenuLabel>
-        <DropdownMenuSeparator className="bg-gray-200 dark:bg-gray-700" />
+        <DropdownMenuSeparator className="bg-gray-700" />
         <DropdownMenuGroup>
-          <DropdownMenuItem className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer rounded-md">
-            <Link href="/dashboard">
+          <DropdownMenuItem className="flex items-center gap-2 px-3 py-2  cursor-pointer rounded-md text-gray-50 hover:bg-[#020617] hover:text-gray-100 ">
+            <Link className="flex items-center gap-1" href="/dashboard">
               <BoltIcon
                 size={16}
-                className="opacity-60 text-gray-600 dark:text-gray-300"
+                className="opacity-60 text-gray-50"
                 aria-hidden="true"
               />
               <span>Dashboard</span>
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
-        <DropdownMenuSeparator className="bg-gray-200 dark:bg-gray-700" />
-        <DropdownMenuItem className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer rounded-md">
-          <LogOutIcon
-            size={16}
-            className="opacity-60 text-gray-600 dark:text-gray-300"
-            aria-hidden="true"
-          />
-          <span>Logout</span>
-        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

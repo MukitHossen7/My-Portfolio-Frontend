@@ -10,7 +10,8 @@ import { Badge } from "../../../components/ui/badge";
 import { getMe } from "../../../services/userServices";
 
 const DashboardHomePage = async () => {
-  const { data: adminData } = await getMe();
+  const response = await getMe();
+  const adminData = response?.data || null;
   return (
     <div className="bg-[#020617] min-h-svh flex justify-center items-center px-4 md:px-0">
       <Card className="w-full max-w-md  bg-[#020617] border border-gray-800 shadow-xl rounded-xl py-6">

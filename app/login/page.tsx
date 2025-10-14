@@ -1,5 +1,4 @@
 import LoginFrom from "../../components/modules/auth/LoginFrom";
-
 const LoginPage = () => {
   return (
     <div>

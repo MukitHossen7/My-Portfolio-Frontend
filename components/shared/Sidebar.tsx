@@ -53,7 +53,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <Image
               src={logo}
               alt="Logo"
-              className="w-9 h-auto object-contain invert brightness-20"
+              className="w-8 h-auto object-contain invert brightness-20"
             />
           </SidebarHeader>
         </Link>
