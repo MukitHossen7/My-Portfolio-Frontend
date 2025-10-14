@@ -9,11 +9,12 @@ import { getAdminData } from "../../helpers/getAdminData";
 // ---------------- CREATE ----------------
 export const createBlogServerAction = async (blogData: IBlogFormData) => {
   const cookieStore = await cookies();
-  const token = cookieStore.get("accessToken")?.value;
+  const token = cookieStore.get("token")?.value;
   if (!token) {
     redirect("/login");
   }
   const admin = await getAdminData();
+  console.log(admin);
   const blogPayload = {
     ...blogData,
     authorId: admin?.id,
@@ -21,12 +22,12 @@ export const createBlogServerAction = async (blogData: IBlogFormData) => {
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog`, {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(blogPayload),
-    // credentials: "include",
   });
   if (!res.ok) throw new Error("Failed to create blog");
   revalidateTag("BLOG");
@@ -39,18 +40,18 @@ export const updateBlogServerAction = async (
   updateBlogData: IBlogFormData
 ) => {
   const cookieStore = await cookies();
-  const token = cookieStore.get("accessToken")?.value;
+  const token = cookieStore.get("token")?.value;
   if (!token) {
     redirect("/login");
   }
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog/${slug}`, {
     method: "PATCH",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(updateBlogData),
-    // credentials: "include",
   });
 
   if (!res.ok) throw new Error("Failed to update blog");
@@ -61,7 +62,7 @@ export const updateBlogServerAction = async (
 // ---------------- DELETE ----------------
 export const deleteBlogServerAction = async (slug: string) => {
   const cookieStore = await cookies();
-  const token = cookieStore.get("accessToken")?.value;
+  const token = cookieStore.get("token")?.value;
 
   if (!token) {
     redirect("/login");
@@ -69,11 +70,11 @@ export const deleteBlogServerAction = async (slug: string) => {
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/blog/${slug}`, {
     method: "DELETE",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    // credentials: "include",
   });
 
   if (!res.ok) throw new Error("Failed to delete blog");

@@ -11,7 +11,7 @@ export const createProjectServerAction = async (
   projectData: IProjectFormData
 ) => {
   const cookieStore = await cookies();
-  const token = cookieStore.get("accessToken")?.value;
+  const token = cookieStore.get("token")?.value;
   if (!token) {
     redirect("/login");
   }
@@ -24,12 +24,12 @@ export const createProjectServerAction = async (
   };
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/project`, {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(payload),
-    // credentials: "include",
   });
   if (!res.ok) throw new Error("Failed to create project");
   revalidateTag("PROJECT");
@@ -42,7 +42,7 @@ export const updateProjectServerAction = async (
   updateProjectData: IProjectFormData
 ) => {
   const cookieStore = await cookies();
-  const token = cookieStore.get("accessToken")?.value;
+  const token = cookieStore.get("token")?.value;
   if (!token) {
     redirect("/login");
   }
@@ -50,12 +50,12 @@ export const updateProjectServerAction = async (
     `${process.env.NEXT_PUBLIC_BASE_API}/project/${slug}`,
     {
       method: "PATCH",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(updateProjectData),
-      // credentials: "include",
     }
   );
 
@@ -67,7 +67,7 @@ export const updateProjectServerAction = async (
 // ---------------- DELETE ----------------
 export const deleteProjectServerAction = async (slug: string) => {
   const cookieStore = await cookies();
-  const token = cookieStore.get("accessToken")?.value;
+  const token = cookieStore.get("token")?.value;
   if (!token) {
     redirect("/login");
   }
@@ -76,11 +76,11 @@ export const deleteProjectServerAction = async (slug: string) => {
     `${process.env.NEXT_PUBLIC_BASE_API}/project/${slug}`,
     {
       method: "DELETE",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      // credentials: "include",
     }
   );
   if (!res.ok) throw new Error("Failed to delete blog");
