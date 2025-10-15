@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-
 import { Mail, Phone, MapPin } from "lucide-react";
 import {
   Card,
@@ -13,14 +11,65 @@ import { BorderBeam } from "../../../components/ui/border-beam";
 import { Input } from "../../../components/ui/input";
 import { Textarea } from "../../../components/ui/textarea";
 import { Button } from "../../../components/ui/button";
+import { useForm } from "react-hook-form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../../../components/ui/form";
+import z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
+
+const formSchema = z.object({
+  name: z.string().min(2, {
+    message: "Name is required.",
+  }),
+  email: z.string().email({
+    message: "Please enter a valid email address.",
+  }),
+  message: z.string().min(10, {
+    message: "Message must be at least 10 characters long.",
+  }),
+});
 
 export default function ContactPage() {
-  const [loading, setLoading] = useState(false);
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+  });
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const formData = new FormData();
+      formData.append("access_key", "07e7c3eb-9ada-4328-b749-95500ea1045c");
+      formData.append("name", values.name);
+      formData.append("email", values.email);
+      formData.append("message", values.message);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setTimeout(() => setLoading(false), 2000);
+      // Send data to Web3Forms
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+      const result = await response.json();
+      if (result.success) {
+        toast.success("Message sent successfully!");
+        form.reset();
+      } else {
+        toast.error("Failed to send message. Try again.");
+        console.error(result);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong!");
+    }
   };
 
   return (
@@ -76,32 +125,73 @@ export default function ContactPage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="mt-4">
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <Input
-                type="text"
-                placeholder="Your Name"
-                required
-                className="bg-[#020617] text-gray-100 border-gray-800 border  "
-              />
-              <Input
-                type="email"
-                placeholder="Your Email"
-                required
-                className="bg-[#020617] text-gray-100 border-gray-800"
-              />
-              <Textarea
-                placeholder="Your Message"
-                required
-                className="bg-[#020617] text-gray-100 border-gray-800 min-h-[150px]"
-              />
-              <Button
-                type="submit"
-                className="w-full bg-cyan-600 hover:bg-cyan-700 text-gray-100"
-                disabled={loading}
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-4"
               >
-                {loading ? "Sending..." : "Send Message"}
-              </Button>
-            </form>
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-gray-300">Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          placeholder="Your Name"
+                          className="bg-[#020617] text-gray-100 border-gray-800"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-gray-300">Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          placeholder="Your Email"
+                          className="bg-[#020617] text-gray-100 border-gray-800"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-gray-300">Message</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          {...field}
+                          placeholder="Your Message"
+                          className="bg-[#020617] text-gray-100 border-gray-800 min-h-[150px]"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <Button
+                  type="submit"
+                  className="w-full bg-cyan-600 hover:bg-cyan-700 text-gray-100"
+                >
+                  Send Message
+                </Button>
+              </form>
+            </Form>
           </CardContent>
         </Card>
       </div>
