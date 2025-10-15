@@ -4,7 +4,7 @@ import { IProject } from "../../../types";
 import ProjectCard from "../../../components/modules/Project/ProjectCard";
 
 export const metadata: Metadata = {
-  title: "Portfolio | All Projects",
+  title: "Mukit Hossen - Projects | FullStack Developer Portfolio",
   description:
     "Browse my portfolio projects built with React.js, Next.js, Node.js, Express.js, MongoDB, Mongoose, Prisma, PostgreSQL, TailwindCSS, JavaScript, TypeScript, and Redux. Showcasing clean UI, strong functionality, and modern web development.",
 };

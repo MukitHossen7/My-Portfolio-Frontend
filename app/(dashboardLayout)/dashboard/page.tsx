@@ -8,6 +8,13 @@ import {
 } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { getMe } from "../../../services/userServices";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Mukit Hossen - Dashboard | Profile Dashboard",
+  description:
+    "Access Mukit Hossen's professional portfolio dashboard. Create, edit, and manage blogs and projects efficiently with a modern and secure interface.",
+};
 
 const DashboardHomePage = async () => {
   const response = await getMe();

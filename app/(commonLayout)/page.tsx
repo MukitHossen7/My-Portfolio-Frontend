@@ -7,6 +7,13 @@ import { getAllProjects } from "../../services/projectServices";
 import ProjectCardSkeleton from "../../components/modules/Project/ProjectCardSkeleton";
 import ProjectCard from "../../components/modules/Project/ProjectCard";
 import { IProject } from "../../types";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Mukit Hossen - Home | FullStack Developer Portfolio",
+  description:
+    "Welcome to Mukit Hossen's portfolio. Explore projects, blogs, and professional profile built with React, Next.js, and JavaScript.",
+};
 
 const HomePage = async () => {
   const { data: projectData } = await getAllProjects();

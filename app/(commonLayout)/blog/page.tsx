@@ -1,6 +1,13 @@
+import { Metadata } from "next";
 import BlogCard from "../../../components/modules/Blogs/BlogCard";
 import { getAllBlogs } from "../../../services/blogServices";
 import { IBlog } from "../../../types";
+
+export const metadata: Metadata = {
+  title: "Mukit Hossen - Blog | Web Development Articles",
+  description:
+    "Read Mukit Hossen's blogs on web development, React, Next.js, JavaScript tips, and professional insights.",
+};
 
 const BlogPage = async () => {
   const { data: blogData } = await getAllBlogs();
