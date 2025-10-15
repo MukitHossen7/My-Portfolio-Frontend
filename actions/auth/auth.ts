@@ -22,7 +22,7 @@ export const createLogin = async (loginData: {
   if (result?.success) {
     // console.log('User login successful!', result);
     const cookiesStore = await cookies();
-    cookiesStore.set("token", result?.data?.accessToken, {
+    cookiesStore.set("token", result?.data?.token, {
       httpOnly: true,
       sameSite: "none",
       secure: true,

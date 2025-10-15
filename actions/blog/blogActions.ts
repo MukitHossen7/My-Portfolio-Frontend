@@ -14,7 +14,6 @@ export const createBlogServerAction = async (blogData: IBlogFormData) => {
     redirect("/login");
   }
   const admin = await getAdminData();
-  console.log(admin);
   const blogPayload = {
     ...blogData,
     authorId: admin?.id,

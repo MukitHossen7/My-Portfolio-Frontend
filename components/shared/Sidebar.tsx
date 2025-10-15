@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { LogOut } from "lucide-react";
 import logo from "../../assets/icons/logo.png";
 import Image from "next/image";
 import {
@@ -16,6 +15,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "../ui/sidebar";
+import LogoutButton from "../modules/auth/LogOutButton";
 
 // This is sample data.
 const data = {
@@ -85,10 +85,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
         {/* ✅ Logout Button (Bottom) */}
         <div className="p-4 border-t border-gray-800 bg-[#020617]">
-          <button className="w-full flex items-center gap-2 text-gray-200 hover:text-gray-100 hover:bg-gray-800 transition-all px-3 py-2 rounded-md border border-gray-700">
-            <LogOut className="w-4 h-4" />
-            <span>Logout</span>
-          </button>
+          <LogoutButton />
         </div>
 
         <SidebarRail />
