@@ -124,7 +124,7 @@ export default async function Navbar() {
         {/* Right side */}
         <div className="flex flex-1 items-center justify-end gap-4">
           {user?.email ? (
-            <UserMenu />
+            <UserMenu user={user} />
           ) : (
             <Link href="/login">
               <Button className="border border-gray-700 bg-[#020617] text-gray-100">

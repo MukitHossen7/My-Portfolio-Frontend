@@ -1,36 +1,128 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# My Portfolio
 
-## Getting Started
+- This project is my **personal portfolio website** designed to showcase Mukit Hossen’s work, projects, and blogs. It includes both **public-facing pages** for visitors and a **private dashboard** for the portfolio owner to manage content securely.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Live Link
+
+```
+https://mukit-hossen-portfolio.vercel.app/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Public users can view all blogs and individual blog pages
+- Blogs are dynamically generated using ISR with getStaticPaths + revalidate for efficient content fetching
+- Public section displaying personal projects with thumbnail, live link, description, and key features
+- Uses ISR (Incremental Static Regeneration) for dynamic content updates without rebuilding the entire site
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Private, owner-only dashboard for managing blogs and projects
+- JWT-based authentication ensures secure login and access control
+- Mobile-first and fully responsive across all devices
 
-## Learn More
+## Technologies Used
 
-To learn more about Next.js, take a look at the following resources:
+- **Frontend:**
+- Next.js
+- TypeScript
+- Tailwind CSS
+- **Backend:**
+- Node.js
+- Express.js
+- PostgreSQL
+- Prisma
+- JWT (secure authentication)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Installation & Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+git clone https://github.com/MukitHossen7/My-Portfolio-Frontend.git
+```
 
-## Deploy on Vercel
+```
+cd My-Portfolio-Frontend
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+npm install
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Create a **.env.local** file and add:
+
+```
+NEXT_PUBLIC_BASE_API=http://localhost:5000/api/v1
+DATABASE_URL=postgresql://username:password@localhost:5432/portfolio_db
+JWT_SECRET=your_jwt_secret
+```
+
+```
+npm run dev
+```
+
+## Folder Structure
+
+```bash
+b5a7-portfolio/
+├── app/
+│   ├── modules/
+│   │   ├── auth/
+│   │   ├── blog/
+│   │   ├── project/
+│   │   └── user/
+│   ├── routes/
+│   └── services/
+├── components/
+│   ├── common/
+│   ├── modules/
+│   └── layouts/
+├── pages/
+│   ├── api/
+│   ├── dashboard/
+│   └── public/
+├── prisma/
+├── public/
+├── styles/
+└── package.json
+
+```
+
+## Author
+
+- Developed by **Mukit Hossen**
+- **FullStack Developer**
+
+---
+
+## Dependencies
+
+- "jsonwebtoken": "^9.0.2",
+- "next": "15.5.4",
+- "next-auth": "^4.24.11",
+- "next-themes": "^0.4.6",
+- "ogl": "^1.0.11",
+- "radix-ui": "^1.4.3",
+- "react": "19.1.0",
+- "react-dom": "19.1.0",
+- "react-hook-form": "^7.63.0",
+- "react-icons": "^5.5.0",
+- "react-type-animation": "^3.2.0",
+- "sonner": "^2.0.7",
+- "tailwind-merge": "^3.3.1",
+- "three": "^0.180.0",
+- "zod": "^4.1.11"
+
+## DevDependencies
+
+- "@eslint/eslintrc": "^3",
+- "@tailwindcss/postcss": "^4",
+- "@types/jsonwebtoken": "^9.0.10",
+- "@types/node": "^20",
+- "@types/react": "^19",
+- "@types/react-dom": "^19",
+- "@types/three": "^0.180.0",
+- "eslint": "^9",
+- "eslint-config-next": "15.5.4",
+- "tailwindcss": "^4",
+- "tw-animate-css": "^1.4.0",
+- "typescript": "^5"

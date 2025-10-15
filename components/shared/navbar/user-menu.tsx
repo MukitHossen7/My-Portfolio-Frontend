@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { BoltIcon } from "lucide-react";
 import Link from "next/link";
@@ -13,7 +14,7 @@ import {
 import { Button } from "../../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 
-export default function UserMenu() {
+export default function UserMenu({ user }: { user: any }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -39,10 +40,10 @@ export default function UserMenu() {
       >
         <DropdownMenuLabel className="flex min-w-0 flex-col p-3">
           <span className="text-gray-100 truncate text-sm font-medium">
-            Keith Kennedy
+            {user?.name}
           </span>
           <span className="text-gray-300 truncate text-xs font-normal  dark:text-gray-400">
-            k.kennedy@originui.com
+            {user?.email}
           </span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator className="bg-gray-700" />
