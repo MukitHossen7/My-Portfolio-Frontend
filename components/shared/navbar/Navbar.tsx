@@ -4,15 +4,11 @@ import logo from "../../../assets/icons/logo.png";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { Button } from "../../ui/button";
 import { NavigationMenu, NavigationMenuList } from "../../ui/navigation-menu";
-import UserMenu from "./user-menu";
-import { getMe } from "../../../services/userServices";
 
 export default async function Navbar() {
-  const response = await getMe();
-  const user = response?.data || null;
   return (
     <header className="border-b border-gray-800 sticky top-0 z-50 backdrop-blur-2xl  bg-[#020617] shadow-sm text-gray-100 px-4 md:px-6 lg:px-0">
-      <div className="flex h-16 items-center justify-between gap-4 max-w-7xl mx-auto">
+      <div className="flex h-16 items-center justify-between gap-10 max-w-7xl mx-auto">
         {/* Left side */}
         <Link href="/" className="text-xl font-bold text-gray-300">
           <Image
@@ -122,16 +118,18 @@ export default async function Navbar() {
           </NavigationMenuList>
         </NavigationMenu>
         {/* Right side */}
-        <div className="flex flex-1 items-center justify-end gap-4">
-          {user?.email ? (
-            <UserMenu user={user} />
-          ) : (
-            <Link href="/login">
-              <Button className="border border-gray-700 bg-[#020617] text-gray-100">
-                Login
-              </Button>
-            </Link>
-          )}
+        <div className="">
+          <a
+            href="https://drive.google.com/file/d/1eK2CPnIF4NVEIPIYSLAbpIxSnhKQZVQ_/view?usp=sharing"
+            download="https://drive.google.com/file/d/1eK2CPnIF4NVEIPIYSLAbpIxSnhKQZVQ_/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2 font-medium text-gray-800 bg-gray-100 rounded-lg transition-colors duration-300 overflow-hidden border cursor-pointer"
+          >
+            <span>Resume</span>
+
+            {/* Border Beam Animation */}
+          </a>
         </div>
       </div>
     </header>

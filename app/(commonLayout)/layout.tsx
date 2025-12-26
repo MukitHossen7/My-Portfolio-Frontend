@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Footer from "../../components/shared/Footer";
 import Navbar from "../../components/shared/navbar/Navbar";
 import { Toaster } from "../../components/ui/sonner";
