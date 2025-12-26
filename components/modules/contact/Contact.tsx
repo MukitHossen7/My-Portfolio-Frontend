@@ -72,7 +72,7 @@ const Contact = () => {
     }
   };
   return (
-    <section className="relative bg-[#020617] min-h-screen px-4 py-12 max-w-7xl mx-auto lg:px-0">
+    <section className="relative bg-[#020617] min-h-screen py-16 max-w-7xl mx-auto px-4 md:px-6 xl:px-0">
       {/* Heading */}
       <div className="text-center mb-12">
         <h2 className="text-2xl md:text-3xl font-semibold text-center text-gray-100 mb-2">

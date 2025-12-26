@@ -13,7 +13,7 @@ const ProjectPage = async () => {
   const { data: projectData } = await getAllProjects();
   return (
     <div className="bg-[#020617]">
-      <div className="py-12 max-w-7xl mx-auto px-4 lg:px-0">
+      <div className="py-16 max-w-7xl mx-auto px-4 md:px-6 xl:px-0">
         <h1 className="text-2xl md:text-3xl font-semibold text-center text-gray-100 mb-2">
           All Projects
         </h1>
@@ -23,7 +23,7 @@ const ProjectPage = async () => {
             <div className="w-16 h-[3px] bg-purple-500 rounded-full ml-16"></div>
           </div>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {projectData.map((project: IProject) => (
             <ProjectCard key={project.id} project={project} />
           ))}

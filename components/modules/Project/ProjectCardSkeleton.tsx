@@ -1,46 +1,32 @@
 "use client";
-
-import { Card, CardContent, CardFooter, CardHeader } from "../../ui/card";
+import { Card, CardContent, CardHeader } from "../../ui/card";
 import { Skeleton } from "../../ui/skeleton";
 
 export default function ProjectCardSkeleton() {
   return (
-    <Card className="relative bg-[#020617] shadow-md rounded-xl">
-      {/* Image Skeleton */}
+    <Card className="bg-[#0f172a]/40 border-slate-800 shadow-md rounded-3xl overflow-hidden h-full flex flex-col">
       <CardHeader className="p-0">
-        <Skeleton className="h-56 w-full rounded-t-xl bg-gray-800 shimmer" />
+        <Skeleton className="h-56 w-full bg-slate-800/50 rounded-none animate-pulse" />
       </CardHeader>
 
-      {/* Content */}
-      <CardContent className="p-4">
-        {/* Title */}
-        <Skeleton className="h-6 w-2/3 mb-4 bg-gray-800 shimmer" />
+      <CardContent className="p-6 flex-grow flex flex-col">
+        {/* Title Skeleton */}
+        <Skeleton className="h-7 w-3/4 mb-4 bg-slate-800 animate-pulse rounded-md" />
 
-        {/* Description */}
-        <div className="space-y-2 mb-4">
-          <Skeleton className="h-4 w-full bg-gray-800 shimmer" />
-          <Skeleton className="h-4 w-5/6 bg-gray-800 shimmer" />
-          <Skeleton className="h-4 w-2/3 bg-gray-800 shimmer" />
+        {/* Description Skeleton (Two lines matching line-clamp-2) */}
+        <div className="space-y-2 mb-8">
+          <Skeleton className="h-4 w-full bg-slate-800/60 animate-pulse rounded-md" />
+          <Skeleton className="h-4 w-5/6 bg-slate-800/60 animate-pulse rounded-md" />
         </div>
 
-        {/* Technology section */}
-        <div className="mt-4 space-y-3">
-          <Skeleton className="h-4 w-32 bg-gray-800 shimmer" />
-          <div className="flex flex-wrap gap-2">
-            <Skeleton className="h-6 w-16 rounded-full bg-gray-800 shimmer" />
-            <Skeleton className="h-6 w-20 rounded-full bg-gray-800 shimmer" />
-            <Skeleton className="h-6 w-20 rounded-full bg-gray-800 shimmer" />
-            <Skeleton className="h-6 w-24 rounded-full bg-gray-800 shimmer" />
-          </div>
+        {/* Technology Tags Skeleton (Matching flex-wrap gap-2) */}
+        <div className="flex flex-wrap gap-2 mt-auto">
+          <Skeleton className="h-6 w-16 bg-slate-800 animate-pulse rounded-md" />
+          <Skeleton className="h-6 w-20 bg-slate-800 animate-pulse rounded-md" />
+          <Skeleton className="h-6 w-14 bg-slate-800 animate-pulse rounded-md" />
+          <Skeleton className="h-6 w-18 bg-slate-800 animate-pulse rounded-md" />
         </div>
       </CardContent>
-
-      {/* Footer */}
-      <CardFooter className="p-4 flex flex-wrap gap-3">
-        <Skeleton className="h-8 w-24 rounded-md bg-gray-800 shimmer" />
-        <Skeleton className="h-8 w-24 rounded-md bg-gray-800 shimmer" />
-        <Skeleton className="h-8 w-24 rounded-md bg-gray-800 shimmer" />
-      </CardFooter>
     </Card>
   );
 }

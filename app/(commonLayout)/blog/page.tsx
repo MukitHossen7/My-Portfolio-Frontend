@@ -13,7 +13,7 @@ const BlogPage = async () => {
   const { data: blogData } = await getAllBlogs();
   return (
     <div className="bg-[#020617]">
-      <div className="py-12 max-w-7xl mx-auto px-4 lg:px-0">
+      <div className="py-16 max-w-7xl mx-auto px-4 md:px-6 xl:px-0">
         <h1 className="text-2xl md:text-3xl font-semibold text-center text-gray-100 mb-2">
           My Blogs
         </h1>

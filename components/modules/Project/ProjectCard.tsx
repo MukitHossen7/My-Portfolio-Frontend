@@ -1,101 +1,152 @@
 "use client";
+import React, { useEffect, useRef } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
-import { ExternalLink } from "lucide-react";
-import { AiOutlineArrowRight } from "react-icons/ai";
+import { ExternalLink, Eye } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { IProject } from "../../../types";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../../ui/card";
-import { AnimatedShinyText } from "../../ui/animated-shiny-text";
-import { Button } from "../../ui/button";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ProjectCard = ({ project }: { project: IProject }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  // --- GSAP Entrance Animation ---
+  useEffect(() => {
+    if (cardRef.current) {
+      gsap.fromTo(
+        cardRef.current,
+        { y: 50, opacity: 0, scale: 0.9 },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: cardRef.current,
+            start: "top 90%",
+          },
+        }
+      );
+    }
+  }, []);
+
+  // --- 3D Tilt Logic (Framer Motion) ---
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x);
+  const mouseYSpring = useSpring(y);
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["15deg", "-15deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-15deg", "15deg"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  const technologies = project.technology.flatMap((t) => t.split(","));
+
   return (
-    <Card className="relative bg-[#020617] shadow-md hover:shadow-xl transition-shadow duration-300">
-      {/* Image Section (updated like BlogCard) */}
-      <CardHeader className="p-0">
-        <div className="relative h-56 w-full overflow-hidden rounded-t-lg">
-          <Image
-            src={project?.thumbnail || "/placeholder.svg"}
-            alt={project?.title}
-            fill
-            className="object-cover transition-transform duration-300 hover:scale-110"
-          />
-        </div>
-      </CardHeader>
+    // Perspective wrapper for 3D effect
+    <div style={{ perspective: "1000px" }} className="h-full">
+      <motion.div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          rotateY,
+          rotateX,
+          transformStyle: "preserve-3d",
+        }}
+        className="group relative h-full w-full rounded-3xl bg-[#0f172a]/50 border border-slate-800 transition-all duration-500 hover:border-cyan-500/40 hover:shadow-[0_0_40px_rgba(34,211,238,0.1)] overflow-hidden"
+      >
+        <div
+          style={{ transform: "translateZ(60px)" }}
+          className="flex flex-col h-full"
+        >
+          {/* Image Section (Clean) */}
+          <div className="relative h-56 w-full overflow-hidden">
+            <Image
+              src={project?.thumbnail || "/placeholder.svg"}
+              alt={project?.title}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+          </div>
 
-      {/* Content */}
-      <CardContent className="p-4">
-        <CardTitle className="text-xl md:text-2xl text-gray-100 font-semibold mb-2">
-          {project?.title}
-        </CardTitle>
-        <CardDescription className="text-gray-300 mb-4">
-          {project.description.slice(0, 100)}...
-        </CardDescription>
+          {/* Content Section */}
+          <div className="p-6 flex-grow">
+            <h3 className="text-xl font-bold text-gray-100 mb-2 group-hover:text-cyan-400 transition-colors">
+              {project?.title}
+            </h3>
+            <p className="text-sm text-gray-400 line-clamp-2 mb-6">
+              {project.description}
+            </p>
 
-        <div className="mt-4 space-y-2">
-          <p className="text-base font-semibold text-gray-300">Technologies</p>
-          <div className="flex flex-wrap gap-2">
-            {project.technology
-              .map((tag) => tag.split(","))
-              .map((tech, idx) => (
-                <div
+            <div className="flex flex-wrap gap-2 mb-4">
+              {technologies.slice(0, 4).map((tech, idx) => (
+                <span
                   key={idx}
-                  className="inline-flex items-center rounded-full border border-gray-700 px-3 py-1 text-xs text-gray-200"
+                  className="px-2 py-1 text-[10px] font-medium bg-slate-800/80 text-cyan-300 border border-slate-700 rounded-md"
                 >
-                  <AnimatedShinyText>{tech}</AnimatedShinyText>
-                </div>
+                  {tech.trim()}
+                </span>
               ))}
+            </div>
+          </div>
+
+          {/* Action Buttons Container (Hidden by default, slides up on hover) */}
+          <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-[#020617] via-[#020617]/95 to-transparent transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out flex items-center justify-center gap-3 z-20">
+            {project?.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                className="flex items-center gap-2 px-4 py-2 bg-white text-gray-800 text-sm font-bold rounded-xl hover:bg-cyan-400 transition-all duration-300 hover:scale-105"
+              >
+                <ExternalLink size={16} /> Live
+              </a>
+            )}
+
+            {project?.frontendRepoUrl && (
+              <a
+                href={project.frontendRepoUrl}
+                target="_blank"
+                className="flex items-center gap-2 px-4 py-2 bg-slate-800 text-white text-sm font-bold rounded-xl hover:bg-slate-700  border border-slate-600 transition-all duration-300 hover:scale-105"
+              >
+                <FaGithub size={16} /> Code
+              </a>
+            )}
+
+            <Link
+              href={`/project/${project.slug}`}
+              className="flex items-center gap-2 px-4 py-2 bg-cyan-600 text-white text-sm font-bold rounded-xl hover:bg-cyan-500  transition-all duration-300 hover:scale-105"
+            >
+              <Eye size={16} /> Details
+            </Link>
           </div>
         </div>
-      </CardContent>
-
-      {/* Footer */}
-      <CardFooter className="p-4 flex flex-wrap gap-3">
-        {project?.liveUrl && (
-          <button className=" bg-gray-100 text-gray-800 hover:bg-gray-100 gap-2 px-5 py-1 rounded-md font-medium transition-all duration-300 hover:scale-105">
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2"
-            >
-              <ExternalLink className="h-4 w-4" />
-              Live
-            </a>
-          </button>
-        )}
-        {project?.frontendRepoUrl && (
-          <Button
-            asChild
-            className="bg-gray-900 border border-gray-600 hover:bg-gray-800 text-gray-100 flex items-center gap-2 transition-all duration-300 hover:scale-105"
-          >
-            <a
-              href={project?.frontendRepoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaGithub className="h-4 w-4" />
-              Github
-            </a>
-          </Button>
-        )}
-
-        <Link className="cursor-pointer" href={`/project/${project.slug}`}>
-          <button className="relative flex items-center gap-2 px-3 py-1 font-medium text-gray-300 bg-[#020617] rounded-lg transition-colors duration-300 overflow-hidden border border-gray-700 cursor-pointer">
-            <AiOutlineArrowRight className="h-4 w-4 font-bold" />
-            Details
-          </button>
-        </Link>
-      </CardFooter>
-    </Card>
+      </motion.div>
+    </div>
   );
 };
 

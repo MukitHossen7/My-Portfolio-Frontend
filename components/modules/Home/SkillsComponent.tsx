@@ -97,7 +97,7 @@ const SkillCard = ({ category, idx, cardsRef }: any) => {
         if (el) cardsRef.current[idx] = el;
       }}
       onMouseMove={onMouseMove}
-      className="group relative bg-slate-900/40 backdrop-blur-xl p-6 md:p-8 rounded-[2rem] border border-slate-800 hover:border-cyan-500/50 transition-colors duration-500 overflow-hidden w-full"
+      className="group relative bg-slate-900/40 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-slate-800 hover:border-cyan-500/50 transition-colors duration-500 overflow-hidden w-full"
     >
       <motion.div
         className="pointer-events-none absolute -inset-px rounded-[2rem] opacity-0 group-hover:opacity-100 transition duration-300"
