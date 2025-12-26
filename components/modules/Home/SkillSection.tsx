@@ -4,7 +4,7 @@ import SkillsComponent from "./SkillsComponent";
 
 const SkillSection = () => {
   return (
-    <section className="pt-16 pb-16 bg-[#020617] overflow-hidden relative">
+    <section className="py-16 bg-[#020617] overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-4 md:px-6 xl:px-0">
         <h2 className="text-2xl md:text-3xl font-semibold text-center text-gray-100 uppercase tracking-wider">
           Skills / TechStack
