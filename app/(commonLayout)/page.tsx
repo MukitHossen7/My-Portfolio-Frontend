@@ -1,13 +1,14 @@
 import { Suspense } from "react";
-import BannerSection from "../../components/modules/Home/BannerSection";
 import AboutMeSection from "../../components/modules/Home/AboutMeSection";
-import SkillSection from "../../components/modules/Home/SkillSection";
-import RecentProject from "../../components/modules/Home/RecentProject";
-import { getAllProjects } from "../../services/projectServices";
+import BannerSection from "../../components/modules/Home/BannerSection";
+
 import ProjectCardSkeleton from "../../components/modules/Project/ProjectCardSkeleton";
 import ProjectCard from "../../components/modules/Project/ProjectCard";
 import { IProject } from "../../types";
 import { Metadata } from "next";
+import SkillSection from "../../components/modules/Home/SkillSection";
+import RecentProject from "../../components/modules/Home/RecentProject";
+import { getAllProjects } from "../../services/projectServices";
 
 export const metadata: Metadata = {
   title: "Mukit Hossen - Home | FullStack Developer Portfolio",
@@ -34,7 +35,7 @@ const HomePage = async () => {
           </div>
         }
       >
-        <div className="grid grid-cols-1 lg:grid-cols-2 px-4 md:px-6 lg:px-0 gap-6 max-w-7xl mx-auto pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 container mx-auto px-4 md:px-6 lg:px-0 gap-6 pb-16">
           {projectData?.slice(0, 2).map((project: IProject) => (
             <ProjectCard key={project.id} project={project} />
           ))}

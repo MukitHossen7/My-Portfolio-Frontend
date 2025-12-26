@@ -5,14 +5,14 @@ import { SpinningText } from "../../ui/spinning-text";
 
 const AboutMeSection = () => {
   return (
-    <section className="relative lg:pt-16 flex items-center justify-center  bg-[#020617]">
-      <div className="container mx-auto px-4 md:px-6 lg:px-0 max-w-7xl z-10">
-        <div className=" flex flex-col-reverse lg:grid  lg:grid-cols-2 items-center justify-center gap-10">
+    <section className="relative pt-16 flex items-center justify-center  bg-[#020617]">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 xl:px-0  z-10">
+        <div className="flex flex-col-reverse lg:grid  lg:grid-cols-2 items-center justify-center gap-10">
           {/* Left Section - Image with SpinningText */}
           <div className="relative flex-shrink-0 w-80 h-80 md:w-96 md:h-96 rounded-full flex items-center justify-center p-2 mx-auto md:mx-0">
             <SpinningText
               reverse
-              radius={14}
+              radius={13}
               duration={12}
               style={{
                 textShadow:

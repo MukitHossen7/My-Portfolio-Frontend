@@ -15,7 +15,6 @@ import {
 } from "../../ui/card";
 import { AnimatedShinyText } from "../../ui/animated-shiny-text";
 import { Button } from "../../ui/button";
-import { BorderBeam } from "../../ui/border-beam";
 
 const ProjectCard = ({ project }: { project: IProject }) => {
   return (
@@ -93,16 +92,6 @@ const ProjectCard = ({ project }: { project: IProject }) => {
           <button className="relative flex items-center gap-2 px-3 py-1 font-medium text-gray-300 bg-[#020617] rounded-lg transition-colors duration-300 overflow-hidden border border-gray-700 cursor-pointer">
             <AiOutlineArrowRight className="h-4 w-4 font-bold" />
             Details
-            <BorderBeam
-              size={40}
-              initialOffset={20}
-              className="from-transparent via-cyan-400 to-transparent"
-              transition={{
-                type: "spring",
-                stiffness: 60,
-                damping: 20,
-              }}
-            />
           </button>
         </Link>
       </CardFooter>

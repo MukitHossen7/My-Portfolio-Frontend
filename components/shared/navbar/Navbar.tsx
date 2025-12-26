@@ -7,8 +7,8 @@ import { NavigationMenu, NavigationMenuList } from "../../ui/navigation-menu";
 
 export default async function Navbar() {
   return (
-    <header className="border-b border-gray-800 sticky top-0 z-50 backdrop-blur-2xl  bg-[#020617] shadow-sm text-gray-100 px-4 md:px-6 lg:px-0">
-      <div className="flex h-16 items-center justify-between gap-10 max-w-7xl mx-auto">
+    <header className="border-b border-gray-800 sticky top-0 z-50 backdrop-blur-2xl  bg-[#020617] shadow-sm text-gray-100 ">
+      <div className="flex h-16 items-center justify-between gap-10 max-w-7xl mx-auto  px-4 md:px-6 xl:px-0">
         {/* Left side */}
         <Link href="/" className="text-xl font-bold text-gray-300">
           <Image
