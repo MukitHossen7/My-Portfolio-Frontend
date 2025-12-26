@@ -26,7 +26,7 @@ const AboutMeSection = () => {
             <div className="relative w-[90%] h-[90%] rounded-full overflow-hidden z-10">
               {" "}
               <Image
-                src="https://bairesdev.mo.cloudinary.net/blog/2022/08/portrait-of-a-man-using-a-computer-in-a-modern-office-picture-id1344688156-1.jpg?tx=w_1920,q_auto"
+                src="https://i.ibb.co/Kx8bLWBY/174138051.jpg"
                 alt="Profile Picture"
                 width={256}
                 height={256}
