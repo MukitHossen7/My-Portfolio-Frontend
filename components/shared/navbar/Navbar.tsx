@@ -1,135 +1,124 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import logo from "../../../assets/icons/logo.png";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { Button } from "../../ui/button";
-import { NavigationMenu, NavigationMenuList } from "../../ui/navigation-menu";
+import { cn } from "../../../lib/utils";
 
-export default async function Navbar() {
+export default function Navbar() {
+  const pathname = usePathname();
+
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "Project", href: "/project" },
+    { name: "Blog", href: "/blog" },
+    { name: "Contact", href: "/contact" },
+  ];
+
   return (
-    <header className="border-b border-gray-800 sticky top-0 z-50 backdrop-blur-2xl  bg-[#020617] shadow-sm text-gray-100 ">
-      <div className="flex h-16 items-center justify-between gap-10 max-w-7xl mx-auto  px-4 md:px-6 xl:px-0">
-        {/* Left side */}
-        <Link href="/" className="text-xl font-bold text-gray-300">
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#020617]/80 backdrop-blur-md transition-all duration-300">
+      <div className="flex h-16 items-center justify-between max-w-7xl mx-auto px-4 md:px-6 xl:px-0">
+        {/* Logo Section */}
+        <Link href="/" className="hover:opacity-80 transition-opacity">
           <Image
             src={logo}
             alt="Logo"
-            className="w-8 h-auto object-contain invert brightness-20"
+            width={32}
+            height={32}
+            className="w-8 h-auto object-contain invert brightness-150"
           />
         </Link>
-        <div className="flex flex-1 gap-2">
-          {/* Mobile menu trigger */}
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                className="group size-8 md:hidden text-gray-200"
-                variant="ghost"
-                size="icon"
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={cn(
+                  "relative text-sm font-medium transition-colors duration-300 py-1",
+                  isActive ? "text-cyan-400" : "text-gray-400 hover:text-white"
+                )}
               >
-                <svg
-                  className="pointer-events-none"
-                  width={16}
-                  height={16}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M4 12L20 12"
-                    className="origin-center -translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[315deg]"
-                  />
-                  <path
-                    d="M4 12H20"
-                    className="origin-center transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.8)] group-aria-expanded:rotate-45"
-                  />
-                  <path
-                    d="M4 12H20"
-                    className="origin-center translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[135deg]"
-                  />
-                </svg>
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent
-              align="start"
-              className="w-48 p-1 md:hidden bg-[#020617] border-gray-800  shadow-lg"
-            >
-              <NavigationMenu className="max-w-none *:w-full">
-                <NavigationMenuList className="flex-col items-start gap-0 md:gap-2">
-                  <Link
-                    href="/"
-                    className="block py-2 px-3 text-gray-100 rounded-md"
-                  >
-                    Home
-                  </Link>
-                  <Link
-                    href="/project"
-                    className="block py-2 px-3 text-gray-100 rounded-md"
-                  >
-                    Project
-                  </Link>
-                  <Link
-                    href="/blog"
-                    className="block py-2 px-3 text-gray-100 rounded-md"
-                  >
-                    Blog
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="block py-2 px-3 text-gray-100 rounded-md"
-                  >
-                    Contact
-                  </Link>
-                </NavigationMenuList>
-              </NavigationMenu>
-            </PopoverContent>
-          </Popover>
-        </div>
-        {/* Middle area */}
-        <NavigationMenu className="max-md:hidden">
-          <NavigationMenuList className="gap-10">
-            <Link
-              href="/"
-              className="text-gray-200 font-medium hover:text-cyan-400 hover:font-normal transition-colors duration-200"
-            >
-              Home
-            </Link>
-            <Link
-              href="/project"
-              className="text-gray-200  font-medium  hover:text-cyan-400 hover:font-normal transition-colors duration-200"
-            >
-              Project
-            </Link>
-            <Link
-              href="/blog"
-              className="text-gray-200 font-medium hover:text-cyan-400 hover:font-normal transition-colors duration-200"
-            >
-              Blog
-            </Link>
-            <Link
-              href="/contact"
-              className="text-gray-200 font-medium  hover:text-cyan-400 hover:font-normal transition-colors duration-200"
-            >
-              Contact
-            </Link>
-          </NavigationMenuList>
-        </NavigationMenu>
-        {/* Right side */}
-        <div className="">
+                {link.name}
+                {/* Animated Underline */}
+                <span
+                  className={cn(
+                    "absolute inset-x-0 -bottom-1 h-0.5 bg-cyan-400 transition-all duration-300",
+                    isActive ? "w-full" : "w-0 group-hover:w-full"
+                  )}
+                />
+                {!isActive && (
+                  <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-cyan-400/50 w-0 transition-all duration-300 group-hover:w-full" />
+                )}
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* Right Side - Resume & Mobile Menu */}
+        <div className="flex items-center gap-4">
           <a
             href="https://drive.google.com/file/d/1eK2CPnIF4NVEIPIYSLAbpIxSnhKQZVQ_/view?usp=sharing"
             download="https://drive.google.com/file/d/1eK2CPnIF4NVEIPIYSLAbpIxSnhKQZVQ_/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 py-2 font-medium text-gray-800 bg-gray-100 rounded-lg transition-colors duration-300 overflow-hidden border cursor-pointer"
+            className="px-2 lg:px-4 py-1.5 lg:py-2 font-medium lg:font-medium text-gray-800 bg-gray-100 rounded-lg transition-colors duration-300 overflow-hidden border cursor-pointer"
           >
-            <span>Resume</span>
+            <span>Get Resume</span>
 
             {/* Border Beam Animation */}
           </a>
+
+          {/* Mobile Menu (Shadcn Popover) */}
+          <div className="md:hidden">
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="ghost" size="icon" className="text-gray-200">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                  </svg>
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent
+                align="end"
+                className="w-56 bg-[#020617] border-gray-800 p-2 shadow-2xl"
+              >
+                <div className="flex flex-col gap-1">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      className={cn(
+                        "block px-4 py-3 text-sm font-medium rounded-lg transition-all",
+                        pathname === link.href
+                          ? "bg-cyan-500/10 text-cyan-400"
+                          : "text-gray-300 hover:bg-white/5"
+                      )}
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
+              </PopoverContent>
+            </Popover>
+          </div>
         </div>
       </div>
     </header>
