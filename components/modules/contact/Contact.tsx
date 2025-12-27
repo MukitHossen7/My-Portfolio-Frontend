@@ -1,17 +1,22 @@
 "use client";
 
-import { Mail, Phone, MapPin } from "lucide-react";
+import { useEffect, useRef } from "react";
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "../../../components/ui/card";
-import { BorderBeam } from "../../../components/ui/border-beam";
-import { Input } from "../../../components/ui/input";
-import { Textarea } from "../../../components/ui/textarea";
-import { Button } from "../../../components/ui/button";
+  Mail,
+  Send,
+  Github,
+  Linkedin,
+  Globe,
+  ArrowUpRight,
+  Phone,
+} from "lucide-react";
+import { gsap } from "gsap";
+import { toast } from "sonner";
 import { useForm } from "react-hook-form";
+import z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { Button } from "../../../components/ui/button";
 import {
   Form,
   FormControl,
@@ -20,31 +25,64 @@ import {
   FormLabel,
   FormMessage,
 } from "../../../components/ui/form";
-import z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
 
 const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name is required.",
-  }),
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  message: z.string().min(10, {
-    message: "Message must be at least 10 characters long.",
-  }),
+  name: z.string().min(2, { message: "Name is required." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  message: z
+    .string()
+    .min(10, { message: "Message must be at least 10 characters long." }),
 });
 
 const Contact = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const spotlightRef = useRef<HTMLDivElement>(null);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-    },
+    defaultValues: { name: "", email: "", message: "" },
   });
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Character reveal animation
+      gsap.from(".reveal-char", {
+        y: 100,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.05,
+        ease: "power4.out",
+      });
+
+      // Mouse tracking spotlight
+      const moveSpotlight = (e: MouseEvent) => {
+        const { clientX, clientY } = e;
+        gsap.to(spotlightRef.current, {
+          x: clientX,
+          y: clientY,
+          duration: 1.2,
+          ease: "power2.out",
+        });
+      };
+      window.addEventListener("mousemove", moveSpotlight);
+
+      // Stagger entrance for other items
+      gsap.from(".stagger-item", {
+        opacity: 0,
+        y: 30,
+        stagger: 0.2,
+        duration: 0.8,
+        delay: 0.5,
+        ease: "power3.out",
+      });
+    }, containerRef);
+
+    return () => {
+      ctx.revert();
+      window.removeEventListener("mousemove", () => {});
+    };
+  }, []);
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const formData = new FormData();
@@ -53,146 +91,189 @@ const Contact = () => {
       formData.append("email", values.email);
       formData.append("message", values.message);
 
-      // Send data to Web3Forms
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         body: formData,
       });
       const result = await response.json();
       if (result.success) {
-        toast.success("Message sent successfully!");
+        toast.success("Message transmitted successfully.");
         form.reset();
-      } else {
-        toast.error("Failed to send message. Try again.");
-        console.error(result);
       }
     } catch (error) {
-      console.error(error);
-      toast.error("Something went wrong!");
+      toast.error("Transmission failed.");
     }
   };
+
   return (
-    <section className="relative bg-[#020617] min-h-screen py-16 max-w-7xl mx-auto px-4 md:px-6 xl:px-0">
-      {/* Heading */}
-      <div className="text-center mb-12">
-        <h2 className="text-2xl md:text-3xl font-semibold text-center text-gray-100 mb-2">
-          Get in Touch
-        </h2>
-        <div className="flex justify-center mb-4">
-          <div className="flex flex-col gap-1">
-            <div className="w-24 h-[3px] bg-cyan-500 rounded-full mr-16"></div>
-            <div className="w-16 h-[3px] bg-purple-500 rounded-full "></div>
-          </div>
-        </div>
-        <p className="text-gray-300 max-w-xl mx-auto">
-          I’d love to hear from you! Whether you have a question or just want to
-          say hello, feel free to drop a message.
-        </p>
+    <section
+      ref={containerRef}
+      className="relative bg-[#020617] min-h-screen w-full flex items-center justify-center py-16 overflow-hidden selection:bg-cyan-500 selection:text-black"
+    >
+      {/* Interactive Spotlight */}
+      <div
+        ref={spotlightRef}
+        className="fixed top-0 left-0 w-[800px] h-[800px] bg-cyan-500/10 rounded-full blur-[150px] pointer-events-none -translate-x-1/2 -translate-y-1/2 z-0"
+      />
+
+      {/* Grid Background */}
+      <div className="absolute inset-0 z-0 opacity-20">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:60px_60px]" />
       </div>
 
-      {/* Contact Content */}
-      <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-        {/* Contact Info */}
-        <Card className="relative bg-[#020617] py-5 shadow-md border border-gray-800">
-          <BorderBeam duration={6} size={150} className="via-cyan-500" />
-          <CardHeader>
-            <CardTitle className="text-xl md:text-2xl text-gray-100">
-              Contact Info
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6 text-gray-300 mt-4">
-            <div className="flex items-center gap-3">
-              <Mail className="text-cyan-500" />
-              <span>hossenmukit7@gmail.com</span>
+      <div className="max-w-7xl mx-auto px-4 md:px-6 xl:px-0 w-full relative z-10">
+        {/* lg:grid-cols-2 ensures EXACT 50/50 SPLIT */}
+        <div className="grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
+          {/* LEFT SIDE (50%) */}
+          <div className="space-y-12">
+            <div className="space-y-6 overflow-hidden">
+              <h1 className="text-4xl md:text-6xl xl:text-7xl font-bold leading-tight tracking-tighter text-white">
+                <span className="inline-block reveal-char">LET&apos;S</span>{" "}
+                <br />
+                <span className="inline-block reveal-char bg-gradient-to-r from-cyan-400 to-cyan-700 bg-clip-text text-transparent">
+                  CONNECT.
+                </span>
+              </h1>
+              <p className="stagger-item text-xl text-slate-400 font-light leading-relaxed max-w-lg">
+                I help brands build high-end digital experiences. Ready to turn
+                your vision into reality?
+              </p>
             </div>
-            <div className="flex items-center gap-3">
-              <Phone className="text-cyan-500" />
-              <span>+880 1326153447</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <MapPin className="text-cyan-500" />
-              <span>Rajshahi, Bangladesh</span>
-            </div>
-          </CardContent>
-        </Card>
 
-        {/* Contact Form */}
-        <Card className="bg-[#020617]  shadow-md border border-gray-800 py-5">
-          <CardHeader>
-            <CardTitle className="text-2xl text-gray-100">
-              Send Message
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="mt-4">
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-4"
+            <div className="stagger-item space-y-8 border-t border-slate-800 pt-10">
+              {[
+                { label: "Email", value: "hossenmukit7@gmail.com", icon: Mail },
+                { label: "Phone", value: "01326153447", icon: Phone },
+                {
+                  label: "Location",
+                  value: "Dhaka, Bangladesh",
+                  icon: Globe,
+                },
+              ].map((item, i) => (
+                <div key={i} className="flex flex-col gap-1 group">
+                  <span className="text-[10px] uppercase tracking-[0.4em] text-slate-500 font-bold">
+                    {item.label}
+                  </span>
+                  <div className="flex items-center gap-3 cursor-pointer">
+                    <span className="text-lg md:text-xl text-slate-200 group-hover:text-cyan-400 transition-colors">
+                      {item.value}
+                    </span>
+                    <ArrowUpRight
+                      size={20}
+                      className="text-slate-600 group-hover:text-cyan-400 transition-all"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="stagger-item flex gap-8 items-center text-slate-500">
+              <a
+                href="https://github.com/MukitHossen7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-cyan-400 transition-colors"
               >
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-gray-300">Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          placeholder="Your Name"
-                          className="bg-[#020617] text-gray-100 border-gray-800"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <Github size={26} strokeWidth={1.5} />
+              </a>
+              <a
+                href="www.linkedin.com/in/mukithossen"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-cyan-400 transition-colors"
+              >
+                <Linkedin size={26} strokeWidth={1.5} />
+              </a>
+            </div>
+          </div>
 
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-gray-300">Email</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          placeholder="Your Email"
-                          className="bg-[#020617] text-gray-100 border-gray-800"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+          {/* RIGHT SIDE (50%) - Form takes full half width */}
+          <div className="stagger-item w-full relative group">
+            <div className="absolute -inset-1 bg-cyan-500/20 rounded-[2.5rem] blur-2xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
 
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-gray-300">Message</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          {...field}
-                          placeholder="Your Message"
-                          className="bg-[#020617] text-gray-100 border-gray-800 min-h-[150px]"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <Button
-                  type="submit"
-                  className="w-full bg-cyan-600 hover:bg-cyan-700 text-gray-100"
+            <div className="relative bg-slate-900/40 backdrop-blur-3xl border border-white/10 p-8 md:p-12 xl:p-16 rounded-[2.5rem] shadow-2xl w-full">
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="space-y-10"
                 >
-                  Send Message
-                </Button>
-              </form>
-            </Form>
-          </CardContent>
-        </Card>
+                  <div className="grid grid-cols-1 gap-10">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem className="space-y-3">
+                          <FormLabel className="text-[11px] uppercase tracking-[0.3em] text-slate-500 font-black">
+                            Full Name
+                          </FormLabel>
+                          <FormControl>
+                            <input
+                              {...field}
+                              placeholder="YOUR NAME"
+                              className="w-full bg-transparent border-b border-slate-800 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-cyan-500 transition-all text-lg font-medium"
+                            />
+                          </FormControl>
+                          <FormMessage className="text-xs text-red-500" />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem className="space-y-3">
+                          <FormLabel className="text-[11px] uppercase tracking-[0.3em] text-slate-500 font-black">
+                            Email Address
+                          </FormLabel>
+                          <FormControl>
+                            <input
+                              {...field}
+                              placeholder="EMAIL@DOMAIN.COM"
+                              className="w-full bg-transparent border-b border-slate-800 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-cyan-500 transition-all text-lg font-medium"
+                            />
+                          </FormControl>
+                          <FormMessage className="text-xs text-red-500" />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="message"
+                      render={({ field }) => (
+                        <FormItem className="space-y-3">
+                          <FormLabel className="text-[11px] uppercase tracking-[0.3em] text-slate-500 font-black">
+                            Message
+                          </FormLabel>
+                          <FormControl>
+                            <textarea
+                              {...field}
+                              placeholder="HOW CAN I HELP YOU?"
+                              className="w-full bg-transparent border-b border-slate-800 py-4 text-white placeholder:text-slate-700 focus:outline-none focus:border-cyan-500 transition-all text-lg font-medium h-32 resize-none"
+                            />
+                          </FormControl>
+                          <FormMessage className="text-xs text-red-500" />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="pt-4">
+                    <Button
+                      type="submit"
+                      className="w-full h-20 bg-white text-black hover:bg-cyan-500 hover:text-black font-black text-xs uppercase tracking-[0.4em] rounded-full transition-all flex items-center justify-center gap-4 relative overflow-hidden shadow-xl"
+                    >
+                      <span className="relative z-10 flex items-center gap-3">
+                        Send Message <Send size={18} />
+                      </span>
+                    </Button>
+                  </div>
+                </form>
+              </Form>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
