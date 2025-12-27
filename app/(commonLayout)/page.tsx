@@ -36,7 +36,7 @@ const HomePage = async () => {
         }
       >
         <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto px-4 md:px-6 xl:px-0 pb-16">
-          {projectData?.slice(0, 2).map((project: IProject) => (
+          {projectData?.slice(0, 3).map((project: IProject) => (
             <ProjectCard key={project.id} project={project} />
           ))}
         </div>
